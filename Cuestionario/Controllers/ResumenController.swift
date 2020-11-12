@@ -70,8 +70,6 @@ extension NSMutableAttributedString {
 }
 
 class ResumenController: UIViewController{
-
-//    var tableView : UITableView
     
     private let titulo: UITextView = {
        let textView = UITextView()

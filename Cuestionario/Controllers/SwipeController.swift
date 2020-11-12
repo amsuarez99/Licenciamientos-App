@@ -11,6 +11,7 @@ private let reuseIdentifier = "Cell"
 
 class SwipeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    var viewControllers : [UIViewController] = []
     let historietas = [
         Historieta(color: .systemIndigo, headerText: "Caso 1", bodyText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tellus arcu, bibendum at tincidunt quis, laoreet nec enim. Sed nunc urna, rhoncus at sollicitudin at, rhoncus eu nunc. Sed rhoncus tincidunt mi. In consequat a lectus suscipit tristique. Proin vestibulum tortor vel leo sagittis tempus. In hac habitasse platea dictumst. Suspendisse porta ullamcorper mi quis mollis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris tincidunt semper elit in varius."),
         Historieta(color: .cyan, headerText: "Caso 2", bodyText: "Aliquam sit amet ornare arcu. Curabitur fringilla est vitae mauris tristique, vel rutrum est dictum. Suspendisse rutrum laoreet risus, non viverra sapien placerat vitae. Proin efficitur ultricies velit, sed vehicula ante gravida at. Ut convallis, mauris maximus ultricies consequat, lacus urna ultrices arcu, ultricies convallis leo sem non libero. Donec scelerisque lorem in sagittis vehicula. Phasellus in tristique lectus. Sed vitae justo mauris. Suspendisse egestas venenatis orci id pharetra."),
@@ -27,6 +28,7 @@ class SwipeController: UICollectionViewController, UICollectionViewDelegateFlowL
         btn.setTitleColor(Constants.App.Colors.lightGrayTint, for: .normal)
         btn.titleLabel?.font = Constants.App.Fonts.markupFont
         btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.titleLabel?.textAlignment = .center
         btn.addTarget(self, action: #selector(handlePrev), for: .touchUpInside)
         return btn
     }()
@@ -46,12 +48,13 @@ class SwipeController: UICollectionViewController, UICollectionViewDelegateFlowL
         btn.setTitleColor(Constants.App.Colors.orangeTint, for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.titleLabel?.font = Constants.App.Fonts.markupFont
+        btn.titleLabel?.textAlignment = .center
         btn.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
         return btn
     }()
     
     @IBAction private func handleNext() {
-        let nextIndex = min(pageControl.currentPage + 1, historietas.count - 1)
+        let nextIndex = min(pageControl.currentPage + 1, viewControllers.count - 1)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         print(nextIndex)
         pageControl.currentPage = nextIndex
@@ -61,7 +64,7 @@ class SwipeController: UICollectionViewController, UICollectionViewDelegateFlowL
     private lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
         pc.currentPage = 0
-        pc.numberOfPages = historietas.count
+        pc.numberOfPages = viewControllers.count
         pc.currentPageIndicatorTintColor = Constants.App.Colors.orangeTint
         pc.pageIndicatorTintColor = Constants.App.Colors.lightGrayTint
         return pc
@@ -70,6 +73,7 @@ class SwipeController: UICollectionViewController, UICollectionViewDelegateFlowL
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        setupControllers()
         setupBotones()
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -82,7 +86,18 @@ class SwipeController: UICollectionViewController, UICollectionViewDelegateFlowL
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let x = targetContentOffset.pointee.x
-        pageControl.currentPage = Int(x / view.frame.width)
+        let newPage = Int(x / view.frame.width)
+        pageControl.currentPage = newPage
+       
+    }
+    
+    private func setupControllers(){
+        for historieta in historietas {
+            let historietaController = HistorietaViewController()
+            historietaController.historieta = historieta
+            self.viewControllers.append(historietaController)
+        }
+       self.viewControllers.append(ResumenController())
     }
     
     private func setupBotones() {
@@ -104,7 +119,7 @@ class SwipeController: UICollectionViewController, UICollectionViewDelegateFlowL
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: controles.topAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: controles.topAnchor, constant: -20)
         ])
     }
     // MARK: UICollectionViewDataSource
@@ -117,20 +132,32 @@ class SwipeController: UICollectionViewController, UICollectionViewDelegateFlowL
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return historietas.count
+        return viewControllers.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PageCell
-        let historieta = historietas[indexPath.item]
-        cell.historieta = historieta
+        
+        self.addChild(self.viewControllers[indexPath.item])
+        cell.hostedView = self.viewControllers[indexPath.item].view
+       
+        self.viewControllers[indexPath.item].view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            self.viewControllers[indexPath.item].view.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
+            self.viewControllers[indexPath.item].view.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor),
+            self.viewControllers[indexPath.item].view.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
+            self.viewControllers[indexPath.item].view.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor)
+        ])
+        
+        self.viewControllers[indexPath.item].didMove(toParent: self)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
+
 
 }

@@ -10,7 +10,7 @@ import UIKit
 class QuestionController: UIViewController{
     
     var cellHeight = 75
-
+    
     let answers = ["La salvaguarda y promoción del acervo cultural de la Nación", "Pagarle a los autores de obras literarias", "Reconocer a los autores por cada obra literaria que realice", "Todas las anteriores"]
     
     private let tableView : UITableView = {
