@@ -1,13 +1,13 @@
 //
-//  HistorietaViewController.swift
+//  HistorietaController.swift
 //  Cuestionario
 //
-//  Created by Marcelo Suárez on 11/11/20.
+//  Created by Marcelo Suárez on 12/11/20.
 //
 
 import UIKit
 
-class HistorietaViewController: UIViewController {
+class HistorietaController: UIViewController {
 
     var historieta: Historieta? {
         didSet {
@@ -17,7 +17,6 @@ class HistorietaViewController: UIViewController {
             imageView.backgroundColor = unwrappedHistorieta.color
             
             let attributedText = NSMutableAttributedString(string: unwrappedHistorieta.headerText, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
-            
             attributedText.append(NSAttributedString(string: "\n\n\n\(unwrappedHistorieta.bodyText)", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.lightGrayTint]))
             
             descriptionTextView.attributedText = attributedText
@@ -78,3 +77,4 @@ class HistorietaViewController: UIViewController {
         descriptionTextView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
 }
+

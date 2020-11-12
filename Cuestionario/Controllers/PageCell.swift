@@ -7,16 +7,11 @@ import UIKit
 class PageCell: UICollectionViewCell {
     
     // MARK: - HostedView
-
-        // 1
         weak var hostedView: UIView? {
             didSet {
-              // 2
               if let oldValue = oldValue {
                   oldValue.removeFromSuperview()
               }
-
-              // 3
               if let hostedView = hostedView {
                   hostedView.frame = contentView.bounds
                   contentView.addSubview(hostedView)
@@ -25,8 +20,6 @@ class PageCell: UICollectionViewCell {
         }
 
         // MARK: - Reuse
-
-        // 4
         override func prepareForReuse() {
             super.prepareForReuse()
 
