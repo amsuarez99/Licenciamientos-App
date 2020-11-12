@@ -30,7 +30,7 @@ class RootViewController: UIViewController {
         btn.layer.cornerRadius = 5
         btn.clipsToBounds = true
         btn.translatesAutoresizingMaskIntoConstraints = false
-        //        btn.addTarget(self, action: #selector(btnCuestionariosAction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(btnCuestionariosAction), for: .touchUpInside)
         return btn
     }()
     
@@ -54,7 +54,10 @@ class RootViewController: UIViewController {
     }
     
     @IBAction func btnCuestionariosAction() {
-        
+        print("ehllo")
+        let nav = UINavigationController()
+        let CuestionarioVC = CuestionariosController()
+        nav.pushViewController(CuestionarioVC, animated: true)
     }
     
     private func setupViews() {

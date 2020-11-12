@@ -103,7 +103,7 @@ class TemaCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupViews() {
+    private func setupViews() {
         
         self.addSubview(cardView)
         NSLayoutConstraint.activate([
