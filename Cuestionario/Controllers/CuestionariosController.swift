@@ -9,14 +9,14 @@ import UIKit
 
 class CuestionariosController: UIViewController, cuestionarioController {
     
-    let data = ["Ley Federal de Derechos de Autor", "Recursos de uso libre", "Hola", "adiòs"]
+    let data = ["Ley Federal de Derechos de Autor", "Recursos de uso libre", "Cuestionario3", "Cuestionario4"]
     let numberOfQuestions = 5
     let usuario = Usuario()
-    private var cuestionario = Cuestionario(tema: "LFDA", descripcion: "hola bb", foto: "hola 2", preguntas:
+    private var cuestionario = Cuestionario(tema: "LFDA", descripcion: "Descripción de cuestionario", foto: "foto_cuestionario1", preguntas:
             [
                 Pregunta(pregunta: "La Ley Federal de Derechos de Autor establece que: ", opciones: ["La salvaguarda y promoción del acervo cultural de la Nación", "Pagarle a los autores de obras literarias", "Reconocer a los autores por cada obra literaria que realice", "Todas las anteriores"], indiceRespuesta: 0),
-                Pregunta(pregunta: "Hola cómo estás?", opciones: ["Me kiero morir", "I want to die", "All of the above"], indiceRespuesta: 1),
-                Pregunta(pregunta: "Pregunta3", opciones: ["opcion1", "opcion2", "opcion3", "opcion4"], indiceRespuesta: 2)
+                Pregunta(pregunta: "Esta es la pregunta 2?", opciones: ["Opción 1", "Opción 2", "Opción 3"], indiceRespuesta: 1),
+                Pregunta(pregunta: "Pregunta 3", opciones: ["opcion1", "opcion2", "opcion3", "opcion4"], indiceRespuesta: 2)
             ]
     )
     private lazy var resumenVC = ResumenSwipeController(collectionViewLayout: UICollectionViewLayout())

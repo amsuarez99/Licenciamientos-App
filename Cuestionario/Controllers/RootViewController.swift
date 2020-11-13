@@ -47,16 +47,17 @@ class RootViewController: UIViewController {
         return btn
     }()
     
+    @IBAction private func btnCuestionariosAction() {
+        let cuestionarioVC = CuestionariosController()
+        self.navigationController?.pushViewController(cuestionarioVC, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
     }
     
-    @IBAction private func btnCuestionariosAction() {
-        self.navigationController?.pushViewController(CuestionariosController(), animated: true)
-    }
-    
+   
     private func setupViews() {
         self.view.backgroundColor = .white
         let textoContainerView = UIView()
