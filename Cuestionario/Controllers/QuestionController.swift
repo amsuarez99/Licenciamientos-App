@@ -9,15 +9,19 @@ import UIKit
 
 protocol cuestionarioController {
     func getResumenInstance() -> ResumenSwipeController
+    func getPregunta() -> Pregunta?
+    func getNumPreguntas() -> Int
+    func getNumPregunta() -> Int
 }
 
 class QuestionController: UIViewController{
     
     private var cellHeight = 75
-    var selectedAnswer: Int?
+    var pregunta: Pregunta!
+    var respuestaSeleccionada: Int?
     var delegadoCuestionario: cuestionarioController!
-
-    let pregunta = Pregunta(pregunta: "Hola", opciones: ["La salvaguarda y promoción del acervo cultural de la Nación", "Pagarle a los autores de obras literarias", "Reconocer a los autores por cada obra literaria que realice", "Todas las anteriores"], indiceRespuesta: 0)
+    private var preguntaActual: Int!
+   
     
     private let tableView : UITableView = {
        let tv = UITableView()
@@ -68,32 +72,34 @@ class QuestionController: UIViewController{
     }()
     
     @IBAction private func contestaPregunta() {
-        guard let i = selectedAnswer else {return}
+        guard let i = respuestaSeleccionada else {print("Selecciona Una opción"); return} // falta notificar que se seleccione una opcion
         if i == pregunta.indiceRespuesta {
-            // Feedback de respuesta correcta
+            print("Respuesta Correcta")
+            
         } else {
-            // Feedback de respuesta incorrecta
+           print("Respuesta Incorrecta")
         }
         
-        // Checar con superclase en què pregunta estoy
-        let qVC = QuestionController()
-        qVC.lbScore.text = "hola"
-        qVC.delegadoCuestionario = delegadoCuestionario
-        self.navigationController?.pushViewController(qVC, animated: true)
+        // Pedir pregunta a delegado
+        if let pregunta = delegadoCuestionario.getPregunta() {
+            let qVC = QuestionController()
+            qVC.title = self.title
+            qVC.pregunta = pregunta
+            qVC.delegadoCuestionario = delegadoCuestionario
+            self.navigationController?.pushViewController(qVC, animated: true)
+        } else {
+            let feedbackVC = FeedbackController()
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            self.navigationController?.pushViewController(feedbackVC, animated: true)
+        }
         self.navigationController?.viewControllers.remove(at: (navigationController?.viewControllers.count)! - 2)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(presentVC))
-//            UIBarButtonItem(title: "Resumen", style: .plain, target: self, action: #selector(presentVC))
-        
-        self.view.backgroundColor = .white
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.tableFooterView = UIView()
+        preguntaActual = delegadoCuestionario.getNumPregunta()
+        setupNav()
+        setupTableView()
         setupViews()
     }
     
@@ -101,7 +107,23 @@ class QuestionController: UIViewController{
         present(delegadoCuestionario.getResumenInstance(), animated: true, completion: nil)
     }
     
+    private func setupNav() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(presentVC))
+    }
+    
+    private func setupTableView() {
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.tableFooterView = UIView()
+    }
+    
     private func setupViews() {
+        
+        self.view.backgroundColor = .white
+        // Sets up Question
+        tvPregunta.attributedText = NSMutableAttributedString(string: "Q\(self.preguntaActual! + 1): \(self.pregunta.pregunta!)", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
+        lbProgreso.text = "Pregunta \(preguntaActual + 1) de \(delegadoCuestionario.getNumPreguntas())"
         let labelsStackView = UIStackView(arrangedSubviews: [lbProgreso,lbScore])
         labelsStackView.translatesAutoresizingMaskIntoConstraints = false
         labelsStackView.distribution = .fillEqually
@@ -180,7 +202,7 @@ extension QuestionController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedAnswer = indexPath.row
+        respuestaSeleccionada = indexPath.row
     }
     
 }

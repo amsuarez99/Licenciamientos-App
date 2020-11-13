@@ -9,7 +9,16 @@ import UIKit
 
 class CuestionariosController: UIViewController, cuestionarioController {
     
-    let data = ["Tema 1", "Tema 2"]
+    let data = ["Ley Federal de Derechos de Autor", "Recursos de uso libre", "Hola", "adiòs"]
+    let numberOfQuestions = 5
+    let usuario = Usuario()
+    private var cuestionario = Cuestionario(tema: "LFDA", descripcion: "hola bb", foto: "hola 2", preguntas:
+            [
+                Pregunta(pregunta: "La Ley Federal de Derechos de Autor establece que: ", opciones: ["La salvaguarda y promoción del acervo cultural de la Nación", "Pagarle a los autores de obras literarias", "Reconocer a los autores por cada obra literaria que realice", "Todas las anteriores"], indiceRespuesta: 0),
+                Pregunta(pregunta: "Hola cómo estás?", opciones: ["Me kiero morir", "I want to die", "All of the above"], indiceRespuesta: 1),
+                Pregunta(pregunta: "Pregunta3", opciones: ["opcion1", "opcion2", "opcion3", "opcion4"], indiceRespuesta: 2)
+            ]
+    )
     private lazy var resumenVC = ResumenSwipeController(collectionViewLayout: UICollectionViewLayout())
 
     private let tableView : UITableView = {
@@ -64,6 +73,24 @@ class CuestionariosController: UIViewController, cuestionarioController {
     func getResumenInstance() -> ResumenSwipeController {
         return resumenVC
     }
+    
+    func getPregunta() -> Pregunta? {
+        usuario.contestoPregunta()
+        let preguntaActual = usuario.getPreguntaActual()
+        if preguntaActual == cuestionario.getPreguntas().count {
+            return nil
+        }
+        return cuestionario.getPregunta(for: usuario.getPreguntaActual())
+    }
+    
+    func getNumPregunta() -> Int {
+        return usuario.getPreguntaActual()
+    }
+    
+    func getNumPreguntas() -> Int {
+        return cuestionario.getPreguntas().count
+    }
+    
 }
 
 
@@ -87,7 +114,11 @@ extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Sets the question controller and assigns it to self so that it can retrieve resumenController
         let qVC = QuestionController()
+
+        usuario.setPreguntaActual(0)
+        qVC.pregunta = cuestionario.getPregunta(for: usuario.getPreguntaActual())
         qVC.delegadoCuestionario = self
+        qVC.title = cuestionario.getTema()
         self.navigationController?.pushViewController(qVC, animated: true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -104,7 +135,7 @@ class TemaCell: UITableViewCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Sample Answer"
-        label.font = Constants.App.Fonts.titleFont
+        label.font = Constants.App.Fonts.markupFont
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

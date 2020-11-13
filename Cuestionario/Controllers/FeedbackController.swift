@@ -39,9 +39,13 @@ class FeedbackController: UIViewController{
         btn.layer.cornerRadius = 5
         btn.clipsToBounds = true
         btn.translatesAutoresizingMaskIntoConstraints = false
-//        btn.addTarget(self, action: #selector(btnCuestionariosAction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(terminarCuestionario), for: .touchUpInside)
         return btn
     }()
+    
+    @IBAction private func terminarCuestionario() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +53,12 @@ class FeedbackController: UIViewController{
     }
     
     private func setupViews() {
+        
+        let attributedText = NSMutableAttributedString(string: "Feedback", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.orangeTint])
+        attributedText.append(NSMutableAttributedString(string: "Tas bien meco jajajsj", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint]))
+        self.tvFeedback.attributedText = attributedText
+        
+        self.view.backgroundColor = .white
         let topPortionView = UIView()
         topPortionView.translatesAutoresizingMaskIntoConstraints = false
         topPortionView.backgroundColor = .systemIndigo

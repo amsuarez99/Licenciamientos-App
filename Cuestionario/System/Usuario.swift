@@ -22,6 +22,9 @@ class Usuario: NSObject {
         self.respuestas.append(respuesta)
         preguntaActual += 1
     }
+    func contestoPregunta() {
+        preguntaActual += 1
+    }
     func getPreguntaActual() -> Int { return self.preguntaActual }
     func getRespuestas() -> [Int] { return self.respuestas }
 }

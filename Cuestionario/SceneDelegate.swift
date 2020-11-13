@@ -19,12 +19,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Navbar appearance
         UINavigationBar.appearance().barTintColor = Constants.App.Colors.orangeTint
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
         UINavigationBar.appearance().tintColor = .white
-
+        
         
         // Sets NavController as root and adds root to it
         let nav = UINavigationController()
-        let rootVC = CuestionariosController()
+        let rootVC = RootViewController()
         nav.viewControllers = [rootVC]
         nav.setNavigationBarHidden(true, animated: false)
         
