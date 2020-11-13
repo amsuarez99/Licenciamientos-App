@@ -53,15 +53,12 @@ class RootViewController: UIViewController {
         setupViews()
     }
     
-    @IBAction func btnCuestionariosAction() {
-        print("ehllo")
-        let nav = UINavigationController()
-        let CuestionarioVC = CuestionariosController()
-        nav.pushViewController(CuestionarioVC, animated: true)
+    @IBAction private func btnCuestionariosAction() {
+        self.navigationController?.pushViewController(CuestionariosController(), animated: true)
     }
     
     private func setupViews() {
-        
+        self.view.backgroundColor = .white
         let textoContainerView = UIView()
         textoContainerView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textoContainerView)
@@ -96,4 +93,3 @@ class RootViewController: UIViewController {
         ])
     }
 }
-

@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol cuestionarioController {
+    func getResumenInstance() -> ResumenSwipeController
+}
+
 class QuestionController: UIViewController{
     
-    var cellHeight = 75
-    
-    let answers = ["La salvaguarda y promoción del acervo cultural de la Nación", "Pagarle a los autores de obras literarias", "Reconocer a los autores por cada obra literaria que realice", "Todas las anteriores"]
+    private var cellHeight = 75
+    var selectedAnswer: Int?
+    var delegadoCuestionario: cuestionarioController!
+
+    let pregunta = Pregunta(pregunta: "Hola", opciones: ["La salvaguarda y promoción del acervo cultural de la Nación", "Pagarle a los autores de obras literarias", "Reconocer a los autores por cada obra literaria que realice", "Todas las anteriores"], indiceRespuesta: 0)
     
     private let tableView : UITableView = {
        let tv = UITableView()
@@ -57,18 +63,44 @@ class QuestionController: UIViewController{
         btn.layer.cornerRadius = 5
         btn.clipsToBounds = true
         btn.translatesAutoresizingMaskIntoConstraints = false
-//        btn.addTarget(self, action: #selector(btnCuestionariosAction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(contestaPregunta), for: .touchUpInside)
         return btn
     }()
     
+    @IBAction private func contestaPregunta() {
+        guard let i = selectedAnswer else {return}
+        if i == pregunta.indiceRespuesta {
+            // Feedback de respuesta correcta
+        } else {
+            // Feedback de respuesta incorrecta
+        }
+        
+        // Checar con superclase en què pregunta estoy
+        let qVC = QuestionController()
+        qVC.lbScore.text = "hola"
+        qVC.delegadoCuestionario = delegadoCuestionario
+        self.navigationController?.pushViewController(qVC, animated: true)
+        self.navigationController?.viewControllers.remove(at: (navigationController?.viewControllers.count)! - 2)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(presentVC))
+//            UIBarButtonItem(title: "Resumen", style: .plain, target: self, action: #selector(presentVC))
+        
+        self.view.backgroundColor = .white
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.tableFooterView = UIView()
         setupViews()
     }
+    
+    @IBAction private func presentVC(){
+        present(delegadoCuestionario.getResumenInstance(), animated: true, completion: nil)
+    }
+    
     private func setupViews() {
         let labelsStackView = UIStackView(arrangedSubviews: [lbProgreso,lbScore])
         labelsStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -121,22 +153,21 @@ class QuestionController: UIViewController{
             tableView.leadingAnchor.constraint(equalTo: bottomPortionContainer.leadingAnchor, constant: 10),
             tableView.trailingAnchor.constraint(equalTo: bottomPortionContainer.trailingAnchor, constant: -10),
             tableView.topAnchor.constraint(equalTo: bottomPortionContainer.topAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: CGFloat(answers.count * cellHeight))
+            tableView.heightAnchor.constraint(equalToConstant: CGFloat(pregunta.opciones.count * cellHeight))
         ])
-        
-        
     }
 }
+
 
 extension QuestionController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.answers.count
+        self.pregunta.opciones.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.textLabel?.text = self.answers[indexPath.row]
+        cell.textLabel?.text = self.pregunta.opciones[indexPath.row]
         cell.textLabel?.font = Constants.App.Fonts.textFont
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.sizeToFit()
@@ -147,4 +178,9 @@ extension QuestionController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         CGFloat(cellHeight)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedAnswer = indexPath.row
+    }
+    
 }

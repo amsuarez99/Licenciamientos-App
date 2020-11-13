@@ -7,13 +7,13 @@
 
 import UIKit
 
-class CuestionariosController: UIViewController {
-    let data = ["Tema 1", "Tema 2"]
+class CuestionariosController: UIViewController, cuestionarioController {
     
+    let data = ["Tema 1", "Tema 2"]
+    private lazy var resumenVC = ResumenSwipeController(collectionViewLayout: UICollectionViewLayout())
 
     private let tableView : UITableView = {
        let tv = UITableView()
-        tv.backgroundColor = .lightGray
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
@@ -39,7 +39,7 @@ class CuestionariosController: UIViewController {
     }
 
     private func setupView() {
-        
+        self.view.backgroundColor = .white
         self.view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
@@ -54,8 +54,20 @@ class CuestionariosController: UIViewController {
             titulo.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor)
         ])
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    
+    // MARK: Protocol Cuestionario Controller
+    func getResumenInstance() -> ResumenSwipeController {
+        return resumenVC
+    }
 }
 
+
+// MARK: Table Protocols
 extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,8 +83,22 @@ extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         (self.tableView.frame.height) * 0.15
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Sets the question controller and assigns it to self so that it can retrieve resumenController
+        let qVC = QuestionController()
+        qVC.delegadoCuestionario = self
+        self.navigationController?.pushViewController(qVC, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        let seconds = 0.5
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            self.present(self.resumenVC, animated: true, completion: nil)
+        }
+    }
 }
 
+// MARK: TableView Cell
 class TemaCell: UITableViewCell {
     
     let nameLabel: UILabel = {
@@ -86,7 +112,6 @@ class TemaCell: UITableViewCell {
     
     let cardView : UIView = {
         let v = UIView()
-//        v.backgroundColor = Constants.App.Colors.orangeTint
         v.backgroundColor = .systemIndigo
         v.translatesAutoresizingMaskIntoConstraints = false
         v.layer.cornerRadius = 15
@@ -119,4 +144,5 @@ class TemaCell: UITableViewCell {
             nameLabel.centerYAnchor.constraint(equalTo: cardView.centerYAnchor)
         ])
     }
+    
 }

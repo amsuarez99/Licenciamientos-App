@@ -81,11 +81,14 @@ class ResumenSwipeController: UICollectionViewController, UICollectionViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        setupBotones()
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         self.collectionView.collectionViewLayout = layout
+        
+        self.view.backgroundColor = .white
+        setupBotones()
+        
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.showsHorizontalScrollIndicator = false
