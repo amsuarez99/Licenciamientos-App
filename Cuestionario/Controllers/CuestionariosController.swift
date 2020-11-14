@@ -9,16 +9,6 @@ import UIKit
 
 class CuestionariosController: UIViewController, cuestionarioController {
     
-    let data = ["Ley Federal de Derechos de Autor", "Recursos de uso libre", "Cuestionario3", "Cuestionario4"]
-    let numberOfQuestions = 5
-    let usuario = Usuario()
-    private var cuestionario = Cuestionario(tema: "LFDA", descripcion: "Descripción de cuestionario", foto: "foto_cuestionario1", preguntas:
-            [
-                Pregunta(pregunta: "La Ley Federal de Derechos de Autor establece que: ", opciones: ["La salvaguarda y promoción del acervo cultural de la Nación", "Pagarle a los autores de obras literarias", "Reconocer a los autores por cada obra literaria que realice", "Todas las anteriores"], indiceRespuesta: 0),
-                Pregunta(pregunta: "Esta es la pregunta 2?", opciones: ["Opción 1", "Opción 2", "Opción 3"], indiceRespuesta: 1),
-                Pregunta(pregunta: "Pregunta 3", opciones: ["opcion1", "opcion2", "opcion3", "opcion4"], indiceRespuesta: 2)
-            ]
-    )
     private lazy var resumenVC = ResumenSwipeController(collectionViewLayout: UICollectionViewLayout())
 
     private let tableView : UITableView = {
@@ -75,20 +65,23 @@ class CuestionariosController: UIViewController, cuestionarioController {
     }
     
     func getPregunta() -> Pregunta? {
-        usuario.contestoPregunta()
-        let preguntaActual = usuario.getPreguntaActual()
-        if preguntaActual == cuestionario.getPreguntas().count {
+        
+        DataSingleton.shared.preguntaActual += 1
+        let preguntaActual = DataSingleton.shared.preguntaActual
+        let cuestionarioActual = DataSingleton.shared.cuestionarioActual
+        if preguntaActual == DataSingleton.shared.cuestionarios[cuestionarioActual!].getPreguntas().count {
             return nil
         }
-        return cuestionario.getPregunta(for: usuario.getPreguntaActual())
+        return DataSingleton.shared.cuestionarios[cuestionarioActual!].getPregunta(for: preguntaActual!)
     }
     
     func getNumPregunta() -> Int {
-        return usuario.getPreguntaActual()
+        return DataSingleton.shared.preguntaActual
     }
     
     func getNumPreguntas() -> Int {
-        return cuestionario.getPreguntas().count
+        let cuestionarioActual = DataSingleton.shared.cuestionarioActual
+        return DataSingleton.shared.cuestionarios[cuestionarioActual!].getPreguntas().count
     }
     
 }
@@ -98,12 +91,12 @@ class CuestionariosController: UIViewController, cuestionarioController {
 extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        DataSingleton.shared.cuestionarios.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! TemaCell
-        cell.nameLabel.text = data[indexPath.row]
+        cell.nameLabel.text = DataSingleton.shared.cuestionarios[indexPath.row].getTema()
         return cell
     }
     
@@ -113,12 +106,12 @@ extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Sets the question controller and assigns it to self so that it can retrieve resumenController
+        DataSingleton.shared.preguntaActual = 0
+        DataSingleton.shared.cuestionarioActual = indexPath.row
         let qVC = QuestionController()
-
-        usuario.setPreguntaActual(0)
-        qVC.pregunta = cuestionario.getPregunta(for: usuario.getPreguntaActual())
+        qVC.pregunta = DataSingleton.shared.cuestionarios[indexPath.row].getPregunta(for: 0)
         qVC.delegadoCuestionario = self
-        qVC.title = cuestionario.getTema()
+        qVC.title = DataSingleton.shared.cuestionarios[indexPath.row].getTema()
         self.navigationController?.pushViewController(qVC, animated: true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         

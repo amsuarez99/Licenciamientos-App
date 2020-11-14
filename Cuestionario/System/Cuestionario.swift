@@ -8,7 +8,6 @@
 import UIKit
 
 class Cuestionario: NSObject, Codable {
-    
     @objc private var tema: String!
     @objc private var descripcion: String!
     @objc private var foto: String!
