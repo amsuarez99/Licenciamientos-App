@@ -11,7 +11,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        if UIApplication.isFirstLaunch() {/*Load from cuestionarios.json*/} else {/*Load from data.json*/}
         return true
     }
 
@@ -32,3 +32,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+extension UIApplication {
+    class func isFirstLaunch() -> Bool {
+        if !UserDefaults.standard.bool(forKey: "hasBeenLaunchedBeforeFlag") {
+            UserDefaults.standard.set(true, forKey: "hasBeenLaunchedBeforeFlag")
+            UserDefaults.standard.synchronize()
+            return true
+        }
+        return false
+    }
+}

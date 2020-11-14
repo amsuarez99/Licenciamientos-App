@@ -12,12 +12,14 @@ class Cuestionario: NSObject, Codable {
     @objc private var descripcion: String!
     @objc private var foto: String!
     @objc private var preguntas: [Pregunta]!
+    @objc private var test: Int
     
     override init(){
         self.tema = ""
         self.descripcion = ""
         self.foto = ""
         self.preguntas = []
+        self.test = 0
     }
     
     init(tema: String, descripcion: String, foto: String, preguntas: [Pregunta]){
@@ -25,6 +27,7 @@ class Cuestionario: NSObject, Codable {
         self.descripcion = descripcion
         self.foto = foto
         self.preguntas = preguntas
+        self.test = 10
     }
     
     enum CodingKeys: String, CodingKey {
@@ -40,7 +43,9 @@ class Cuestionario: NSObject, Codable {
         self.descripcion = try container.decode(String.self, forKey: .descripcion)
         self.foto = try container.decode(String.self, forKey: .foto)
         self.preguntas = try container.decode([Pregunta].self, forKey: .preguntas)
+        self.test = 100
     }
+    
     
     func getPreguntas()-> [Pregunta]! { return self.preguntas }
     func getPregunta(for indice: Int) -> Pregunta! { return self.preguntas[indice] }

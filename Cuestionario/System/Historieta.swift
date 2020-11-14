@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 struct Historieta {
-    let color : UIColor
+    let color : UIColor // foto
     let headerText : String
     let bodyText : String
 }

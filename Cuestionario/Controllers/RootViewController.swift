@@ -12,7 +12,7 @@ class RootViewController: UIViewController {
     private let titulo: UITextView = {
         let textView = UITextView()
         let attributedText = NSMutableAttributedString(string: Constants.App.appName, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
-        attributedText.append(NSAttributedString(string: "\n\n\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in massa facilisis, lobortis ipsum vel, eleifend diam. Nunc eu enim placerat ante rhoncus suscipit sit amet in magna. Duis quis eros orci. Proin ultricies sapien ipsum, quis ornare nibh viverra vitae. Nulla pretium risus vel lectus eleifend porttitor. Maecenas a diam ornare eros pretium blandit pretium et ligula.", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.lightGrayTint]))
+        attributedText.append(NSAttributedString(string: "\n\n\nAprende las bases de esta ley, así como los licenciamientos y recursos de uso libre.", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.lightGrayTint]))
         textView.attributedText = attributedText
         textView.textAlignment = .center
         textView.isEditable = false
