@@ -1,49 +1,82 @@
 [
     {
-      "tema": "Tema 1",
+      "tema": "Conceptos Básicos",
       "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ligula sit amet ante scelerisque mollis. Mauris quis velit tempus, scelerisque nulla scelerisque, cursus nunc. Maecenas augue velit, molestie nec mauris ultricies, porta feugiat diam. In tincidunt, mauris iaculis ornare vehicula, mauris ante elementum quam, viverra ultricies ex mi non ipsum. Fusce consequat ipsum non metus rhoncus, non hendrerit turpis consectetur. Vivamus et pulvinar nisl. Cras at ex ex. Vestibulum lacinia elementum turpis vel iaculis. Mauris ut auctor leo. Aenean mattis ac est non molestie. Sed feugiat neque ut semper sagittis.",
       "foto": "foto1",
       "preguntas": [
         {
-          "pregunta": "pregunta1",
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
           "opciones": [
-            "opcion1",
-            "opcion2",
-            "opcion3"
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
           ],
           "indiceRespuesta": 1
         }
       ]
     },
     {
-      "tema": "Tema 2",
+      "tema": "Reglas Generales",
       "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ligula sit amet ante scelerisque mollis. Mauris quis velit tempus, scelerisque nulla scelerisque, cursus nunc. Maecenas augue velit, molestie nec mauris ultricies, porta feugiat diam. In tincidunt, mauris iaculis ornare vehicula, mauris ante elementum quam, viverra ultricies ex mi non ipsum. Fusce consequat ipsum non metus rhoncus, non hendrerit turpis consectetur. Vivamus et pulvinar nisl. Cras at ex ex. Vestibulum lacinia elementum turpis vel iaculis. Mauris ut auctor leo. Aenean mattis ac est non molestie. Sed feugiat neque ut semper sagittis.",
       "foto": "foto2",
       "preguntas": [
         {
-          "pregunta": "pregunta1",
+          "pregunta": "Las obras literarias y artísticas publicadas en periódicos o revistas o transmitidas por radio, televisión u otros medios de difusión no pierden por ese hecho la protección legal",
           "opciones": [
-            "opcion1",
-            "opcion2",
-            "opcion3"
-          ],
-          "indiceRespuesta": 2
-        },
-        {
-          "pregunta": "pregunta2",
-          "opciones": [
-            "opcion1",
-            "opcion2",
-            "opcion3"
+            "Falso",
+            "Verdadero"
           ],
           "indiceRespuesta": 1
         },
         {
-          "pregunta": "pregunta3",
+          "pregunta": "La obra podrá hacerse del conocimiento público mediante:",
           "opciones": [
-            "opcion1",
+            "Divulgación, publicación, comunicación pública, ejecución o representación pública, distribuciónal público, reproducción",
             "opcion2",
             "opcion3"
+          ],
+          "indiceRespuesta": 0
+        },
+        {
+          "pregunta": "Obreas protejidas por la Ley federal del derecho de autor:",
+          "opciones": [
+            "Aquellas de creación original susceptibles de ser divulgadas o reproducidas ",
+            "Las que su(s) autor(es) sigan con vida",
+            "Las que obtengan regalías"
+          ],
+          "indiceRespuesta": 0
+        }
+      ]
+    },
+    {
+      "tema": "Derechos Patrimoniales",
+      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ligula sit amet ante scelerisque mollis. Mauris quis velit tempus, scelerisque nulla scelerisque, cursus nunc. Maecenas augue velit, molestie nec mauris ultricies, porta feugiat diam.",
+      "foto": "foto3",
+      "preguntas": [
+        {
+          "pregunta": "¿Quién no puede ser el titular del derecho patrimonial?",
+          "opciones": [
+            "el autor",
+            "heredero",
+            "reproductores",
+            "adquirente por cualquier título"
+          ],
+          "indiceRespuesta": 2
+        },
+        {
+          "pregunta": "El titular originario es:",
+          "opciones": [
+            "reproductores",
+            "el autor",
+          ],
+          "indiceRespuesta": 1
+        },
+        {
+          "pregunta": "Los derechos de autor estarán vigentes durante",
+          "opciones": [
+            "la vida de los autores y 100 años después de su muerte",
+            "la vida de los autores",
+            "cien años después de divulgadas"
           ],
           "indiceRespuesta": 0
         }
