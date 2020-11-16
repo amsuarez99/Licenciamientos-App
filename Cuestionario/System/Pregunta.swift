@@ -7,26 +7,29 @@
 
 import UIKit
 
-class Pregunta: NSObject, Codable{
+class Pregunta: Codable {
+    private var pregunta: String
+    private var opciones: [String]
+    private var indiceRespuesta: Int
+    private var opcionSeleccionada: Int?
+    private var feedback: String
     
-    var pregunta : String!
-    var opciones : [String]!
-    var indiceRespuesta : Int!
-    
-    override init(){
-        self.pregunta = "Ninguna"
-        self.opciones = []
-        self.indiceRespuesta = nil
+    enum CodingKeys: CodingKey {
+        case pregunta
+        case opciones
+        case indiceRespuesta
+        case opcionSeleccionada
+        case feedback
     }
     
-    init(pregunta: String, opciones: [String], indiceRespuesta: Int){
-        self.pregunta = pregunta
-        self.opciones = opciones
-        self.indiceRespuesta = indiceRespuesta
+    func esRespuestaCorrecta(indiceRespuesta: Int) -> Bool {
+        return indiceRespuesta == self.indiceRespuesta
     }
     
-    func getPregunta() -> String! { return self.pregunta }
-    func getOpciones() -> [String]! { return self.opciones }
-    func getIndiceRespuesta() -> Int! { return self.indiceRespuesta }
-    func getOpcion(for indice: Int) -> String { return self.opciones[indice] }
+    func getPregunta() -> String { return self.pregunta }
+    func getOpciones() -> [String] { return self.opciones }
+    func getOpcion(at index: Int) -> String { return self.opciones[index] }
+    func setOpcionSeleccionada(_ ans: Int) -> Void { self.indiceRespuesta = ans }
+    func getFeedback() -> String { return self.feedback }
 }
+

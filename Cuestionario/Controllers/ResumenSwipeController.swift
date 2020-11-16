@@ -10,22 +10,7 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class ResumenSwipeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    private let historietas = [
-        Historieta(color: .systemIndigo, headerText: "Caso 1", bodyText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tellus arcu, bibendum at tincidunt quis, laoreet nec enim. Sed nunc urna, rhoncus at sollicitudin at, rhoncus eu nunc. Sed rhoncus tincidunt mi. In consequat a lectus suscipit tristique. Proin vestibulum tortor vel leo sagittis tempus. In hac habitasse platea dictumst. Suspendisse porta ullamcorper mi quis mollis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris tincidunt semper elit in varius."),
-        Historieta(color: .cyan, headerText: "Caso 2", bodyText: "Aliquam sit amet ornare arcu. Curabitur fringilla est vitae mauris tristique, vel rutrum est dictum. Suspendisse rutrum laoreet risus, non viverra sapien placerat vitae. Proin efficitur ultricies velit, sed vehicula ante gravida at. Ut convallis, mauris maximus ultricies consequat, lacus urna ultrices arcu, ultricies convallis leo sem non libero. Donec scelerisque lorem in sagittis vehicula. Phasellus in tristique lectus. Sed vitae justo mauris. Suspendisse egestas venenatis orci id pharetra."),
-        Historieta(color: .yellow, headerText: "Caso 3", bodyText: "Vivamus nec pulvinar urna. Fusce augue enim, eleifend ut elit imperdiet, volutpat condimentum orci. Mauris at ipsum dui. Phasellus dignissim quis ipsum sit amet euismod. Nullam in velit tincidunt, cursus tellus eu, vestibulum tellus. Proin sollicitudin vitae mauris vel ullamcorper. Quisque malesuada, augue at porta porta, libero nisi vestibulum nisl, vel commodo ligula est in leo. Fusce nec risus at ante laoreet placerat vitae maximus lacus.")
-    ]
-    
-    private lazy var viewControllers : [UIViewController] = {
-        var arr: [UIViewController] = []
-        for historieta in historietas {
-            let historietaController = HistorietaController()
-            historietaController.historieta = historieta
-            arr.append(historietaController)
-        }
-       arr.append(ResumenController())
-        return arr
-    }()
+    var viewControllers : [UIViewController]!
     
     private let btnAtras: UIButton = {
         let btn = UIButton()
@@ -66,7 +51,7 @@ class ResumenSwipeController: UICollectionViewController, UICollectionViewDelega
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
-    private lazy var pageControl: UIPageControl = {
+    lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
         pc.currentPage = 0
         pc.numberOfPages = viewControllers.count
@@ -84,7 +69,7 @@ class ResumenSwipeController: UICollectionViewController, UICollectionViewDelega
         
         self.view.backgroundColor = .white
         setupBotones()
-        
+        setupViewControllers()
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.showsHorizontalScrollIndicator = false
@@ -96,6 +81,10 @@ class ResumenSwipeController: UICollectionViewController, UICollectionViewDelega
         let newPage = Int(x / view.frame.width)
         pageControl.currentPage = newPage
        
+    }
+    
+    private func setupViewControllers() {
+        
     }
     
     private func setupBotones() {

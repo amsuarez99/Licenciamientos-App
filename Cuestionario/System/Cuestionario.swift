@@ -7,48 +7,81 @@
 
 import UIKit
 
-class Cuestionario: NSObject, Codable {
-    @objc private var tema: String!
-    @objc private var descripcion: String!
-    @objc private var foto: String!
-    @objc private var preguntas: [Pregunta]!
-    @objc private var test: Int
+//
+//    func getPreguntas()-> [Pregunta]! { return self.preguntas }
+//    func getPregunta(for indice: Int) -> Pregunta! { return self.preguntas[indice] }
+//    func getTema() -> String { return self.tema }
+//    func getDescripcion() -> String { return self.descripcion}
+//}
+
+class Cuestionario: Decodable {
+    private var tema: String
+    private var preguntaActual: Int?
+    private var puntaje: Int?
+    private var feedbackAcum: [String]?
+    private var empezado: Bool = false
     
-    override init(){
-        self.tema = ""
-        self.descripcion = ""
-        self.foto = ""
-        self.preguntas = []
-        self.test = 0
+    
+    var preguntas: [Pregunta]
+    var leccion: Leccion
+    var historietas: [Historieta]
+    
+    private var terminado: Bool {
+        return preguntaActual == preguntas.count
+    }
+    private var progreso: Int {
+        guard let preguntaActual = self.preguntaActual else { return 0 }
+        return Int( preguntaActual / preguntas.count )
     }
     
-    init(tema: String, descripcion: String, foto: String, preguntas: [Pregunta]){
-        self.tema = tema
-        self.descripcion = descripcion
-        self.foto = foto
-        self.preguntas = preguntas
-        self.test = 10
+    private var calificacion: Int? {
+        guard let puntaje = self.puntaje else { return nil }
+        return Int( puntaje / preguntas.count )
     }
     
-    enum CodingKeys: String, CodingKey {
+    private var isDisponible: Bool = false
+    
+    enum CodingKeys: CodingKey {
         case tema
-        case descripcion
-        case foto
+        case preguntaActual
+        case puntaje
+        case feedbackAcum
         case preguntas
+        case leccion
+        case historietas
     }
+    
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.tema = try container.decode(String.self, forKey: .tema)
-        self.descripcion = try container.decode(String.self, forKey: .descripcion)
-        self.foto = try container.decode(String.self, forKey: .foto)
+        self.preguntaActual = try container.decodeIfPresent(Int.self, forKey: .preguntaActual)
+        self.puntaje = try container.decodeIfPresent(Int.self, forKey: .puntaje)
+        self.feedbackAcum = try container.decodeIfPresent([String].self, forKey: .feedbackAcum)
         self.preguntas = try container.decode([Pregunta].self, forKey: .preguntas)
-        self.test = 100
+        self.leccion = try container.decode(Leccion.self, forKey: .leccion)
+        self.historietas = try container.decode([Historieta].self, forKey: .historietas)
     }
     
-    
-    func getPreguntas()-> [Pregunta]! { return self.preguntas }
-    func getPregunta(for indice: Int) -> Pregunta! { return self.preguntas[indice] }
+    func getNumPreguntaActual() -> Int { return self.preguntaActual! }
+    func getNumPreguntas() -> Int { return self.preguntas.count }
+    func getPreguntaActual() -> Pregunta {return self.preguntas[preguntaActual!]}
+    func getHistorietas() -> [Historieta] { return self.historietas }
     func getTema() -> String { return self.tema }
-    func getDescripcion() -> String { return self.descripcion}
+    func getPuntaje() -> Int {
+        guard let puntaje = self.puntaje else { return 0 }
+        return puntaje
+    }
+    func getProgreso() -> Int { return self.progreso }
+    
+    func startCuestionario() {
+        self.preguntaActual = 0
+        self.puntaje = 0
+        self.feedbackAcum = []
+        self.empezado = true
+    }
+    func contestaPregunta() -> Void { self.preguntaActual = self.preguntaActual! + 1 }
+    func isTerminado() -> Bool { return self.terminado }
+    func contestaCorrecto() -> Void { self.puntaje = self.puntaje! + 1 }
+    func setPreguntaActual(_ preguntaActual: Int) -> Void { self.preguntaActual = preguntaActual }
 }

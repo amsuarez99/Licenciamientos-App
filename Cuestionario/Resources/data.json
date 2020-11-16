@@ -1,10 +1,6 @@
 [
     {
       "tema": "Conceptos Básicos",
-      "preguntaActual": "nil",
-      "puntaje": "nil",
-      "feedBackAcum": "nil",
-      "calificacion": "nil",
       "preguntas": [
         {
           "pregunta": "La ley federal del derecho de autor tiene por objeto:",
@@ -14,8 +10,17 @@
             "Pagarle a los autores por cada obra literaria que realice"
           ],
           "indiceRespuesta": 1,
-          "feedback": "Recuerda que la LFDA es ...",
-          "opcionSeleccionada": "nil",
+          "feedback": "Recuerda que la LFDA es ..."
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ..."
         }
       ],
       "leccion": {
@@ -30,12 +35,12 @@
           {
               "foto":"foto1",
               "titulo":"Caso1",
-              "descripcion":"En este caso, pasa que ..."
+              "explicacion":"En este caso, pasa que ..."
           },
           {
               "foto":"foto2",
               "titulo":"Caso2",
-              "descripcion":"En este caso, pasa esto otro ..."
+              "explicacion":"En este caso, pasa esto otro ..."
           }
         ]
     },
@@ -69,13 +74,13 @@
       "historietas": [
           {
               "foto":"foto1",
-              "titulo":"Caso1",
-              "descripcion":"En este caso, pasa que ..."
+              "titulo":"Caso3",
+              "explicacion":"En este caso, pasa que aaaabbbccc..."
           },
           {
               "foto":"foto2",
-              "titulo":"Caso2",
-              "descripcion":"En este caso, pasa esto otro ..."
+              "titulo":"Caso4",
+              "explicacion":"En este caso, pasa estooosososu ..."
           }
         ]
     },

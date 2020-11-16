@@ -14,10 +14,10 @@ class HistorietaController: UIViewController {
             
             guard let unwrappedHistorieta = historieta else { return }
             
-            imageView.backgroundColor = unwrappedHistorieta.color
+            imageView.backgroundColor = .systemIndigo
             
-            let attributedText = NSMutableAttributedString(string: unwrappedHistorieta.headerText, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
-            attributedText.append(NSAttributedString(string: "\n\n\n\(unwrappedHistorieta.bodyText)", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.lightGrayTint]))
+            let attributedText = NSMutableAttributedString(string: unwrappedHistorieta.getTitulo(), attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
+            attributedText.append(NSAttributedString(string: "\n\n\n\(unwrappedHistorieta.getExplicacion())", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.lightGrayTint]))
             
             descriptionTextView.attributedText = attributedText
             descriptionTextView.textAlignment = .center

@@ -11,16 +11,15 @@ protocol cuestionarioController {
     func getResumenInstance() -> ResumenSwipeController
     func getPregunta() -> Pregunta?
     func getNumPreguntas() -> Int
-    func getNumPregunta() -> Int
 }
 
 class QuestionController: UIViewController{
     
     private var cellHeight = 75
     var pregunta: Pregunta!
+    var numPregunta: Int!
     var respuestaSeleccionada: Int?
     var delegadoCuestionario: cuestionarioController!
-    private var preguntaActual: Int!
    
     
     private let tableView : UITableView = {
@@ -42,7 +41,7 @@ class QuestionController: UIViewController{
         let lb = UILabel()
         lb.font = Constants.App.Fonts.textFont
         lb.textColor = Constants.App.Colors.grayTint
-        lb.text = "Score: 0"
+        lb.text = "Score: "
         lb.textAlignment = .right
         lb.translatesAutoresizingMaskIntoConstraints = false
         return lb
@@ -72,12 +71,12 @@ class QuestionController: UIViewController{
     }()
     
     @IBAction private func contestaPregunta() {
-        guard let i = respuestaSeleccionada else {print("Selecciona Una opción"); return} // falta notificar que se seleccione una opcion
-        if i == pregunta.indiceRespuesta {
-            print("Respuesta Correcta")
-            
+        guard let respuestaSeleccionada = respuestaSeleccionada else {print("Selecciona Una opción"); return} // falta notificar que se seleccione una opcion
+        if pregunta.esRespuestaCorrecta(indiceRespuesta: respuestaSeleccionada) {
+            DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].preguntas[numPregunta].setOpcionSeleccionada(respuestaSeleccionada)
+            DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].contestaCorrecto()
         } else {
-           print("Respuesta Incorrecta")
+            print(pregunta.getFeedback())
         }
         
         // Pedir pregunta a delegado
@@ -85,6 +84,7 @@ class QuestionController: UIViewController{
             let qVC = QuestionController()
             qVC.title = self.title
             qVC.pregunta = pregunta
+            qVC.numPregunta = numPregunta + 1
             qVC.delegadoCuestionario = delegadoCuestionario
             self.navigationController?.pushViewController(qVC, animated: true)
         } else {
@@ -97,7 +97,6 @@ class QuestionController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        preguntaActual = delegadoCuestionario.getNumPregunta()
         setupNav()
         setupTableView()
         setupViews()
@@ -122,8 +121,9 @@ class QuestionController: UIViewController{
         
         self.view.backgroundColor = .white
         // Sets up Question
-        tvPregunta.attributedText = NSMutableAttributedString(string: "Q\(self.preguntaActual! + 1): \(self.pregunta.pregunta!)", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
-        lbProgreso.text = "Pregunta \(preguntaActual + 1) de \(delegadoCuestionario.getNumPreguntas())"
+        tvPregunta.attributedText = NSMutableAttributedString(string: "Q\(self.numPregunta + 1): \(self.pregunta.getPregunta())", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
+        lbProgreso.text = "Pregunta \(self.numPregunta + 1) de \(delegadoCuestionario.getNumPreguntas())"
+        lbScore.text! += String(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getPuntaje())
         let labelsStackView = UIStackView(arrangedSubviews: [lbProgreso,lbScore])
         labelsStackView.translatesAutoresizingMaskIntoConstraints = false
         labelsStackView.distribution = .fillEqually
@@ -175,7 +175,7 @@ class QuestionController: UIViewController{
             tableView.leadingAnchor.constraint(equalTo: bottomPortionContainer.leadingAnchor, constant: 10),
             tableView.trailingAnchor.constraint(equalTo: bottomPortionContainer.trailingAnchor, constant: -10),
             tableView.topAnchor.constraint(equalTo: bottomPortionContainer.topAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: CGFloat(pregunta.opciones.count * cellHeight))
+            tableView.heightAnchor.constraint(equalToConstant: CGFloat(pregunta.getOpciones().count * cellHeight))
         ])
     }
 }
@@ -184,12 +184,12 @@ class QuestionController: UIViewController{
 extension QuestionController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.pregunta.opciones.count
+        self.pregunta.getOpciones().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.textLabel?.text = self.pregunta.opciones[indexPath.row]
+        cell.textLabel?.text = self.pregunta.getOpcion(at: indexPath.row)
         cell.textLabel?.font = Constants.App.Fonts.textFont
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.sizeToFit()

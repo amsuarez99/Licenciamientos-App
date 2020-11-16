@@ -8,8 +8,6 @@
 import UIKit
 
 class CuestionariosController: UIViewController, cuestionarioController {
-    
-    private lazy var resumenVC = ResumenSwipeController(collectionViewLayout: UICollectionViewLayout())
 
     private let tableView : UITableView = {
        let tv = UITableView()
@@ -61,27 +59,21 @@ class CuestionariosController: UIViewController, cuestionarioController {
     
     // MARK: Protocol Cuestionario Controller
     func getResumenInstance() -> ResumenSwipeController {
-        return resumenVC
+        return setupResumenController()
     }
     
     func getPregunta() -> Pregunta? {
-        
-        DataSingleton.shared.preguntaActual += 1
-        let preguntaActual = DataSingleton.shared.preguntaActual
-        let cuestionarioActual = DataSingleton.shared.cuestionarioActual
-        if preguntaActual == DataSingleton.shared.cuestionarios[cuestionarioActual!].getPreguntas().count {
-            return nil
+        let cuestionarioActual = DataSingleton.shared.usuario.getCuestionarioActual()
+        DataSingleton.shared.cuestionarios[cuestionarioActual].contestaPregunta()
+        if !DataSingleton.shared.cuestionarios[cuestionarioActual].isTerminado() {
+            return DataSingleton.shared.cuestionarios[cuestionarioActual].getPreguntaActual()
         }
-        return DataSingleton.shared.cuestionarios[cuestionarioActual!].getPregunta(for: preguntaActual!)
-    }
-    
-    func getNumPregunta() -> Int {
-        return DataSingleton.shared.preguntaActual
+        return nil
     }
     
     func getNumPreguntas() -> Int {
-        let cuestionarioActual = DataSingleton.shared.cuestionarioActual
-        return DataSingleton.shared.cuestionarios[cuestionarioActual!].getPreguntas().count
+        let cuestionarioActual = DataSingleton.shared.usuario.cuestionarioActual
+        return DataSingleton.shared.cuestionarios[cuestionarioActual].getNumPreguntas()
     }
     
 }
@@ -106,21 +98,62 @@ extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Sets the question controller and assigns it to self so that it can retrieve resumenController
-        DataSingleton.shared.preguntaActual = 0
-        DataSingleton.shared.cuestionarioActual = indexPath.row
-        let qVC = QuestionController()
-        qVC.pregunta = DataSingleton.shared.cuestionarios[indexPath.row].getPregunta(for: 0)
-        qVC.delegadoCuestionario = self
-        qVC.title = DataSingleton.shared.cuestionarios[indexPath.row].getTema()
+        setupCuestionario(indexPath.row)
+        
+        // Sets up the question VC and pushes it to stack
+        let qVC = setupQuestionController(indexPath.row)
         self.navigationController?.pushViewController(qVC, animated: true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
+        
+        // Present resumen vc after a 0.5 second delay
+        let rVC = setupResumenController()
         let seconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-            self.present(self.resumenVC, animated: true, completion: nil)
+            self.present(rVC, animated: true, completion: nil)
         }
     }
+    
+    private func setupCuestionario(_ index: Int) {
+        DataSingleton.shared.usuario.cuestionarioActual = index
+        if DataSingleton.shared.cuestionarios[index].getProgreso() == 0 {
+            DataSingleton.shared.cuestionarios[index].startCuestionario()
+        }
+    }
+    
+    private func setupQuestionController(_ index: Int) -> QuestionController {
+        let qVC = QuestionController()
+        qVC.pregunta = DataSingleton.shared.cuestionarios[index].getPreguntaActual()
+        qVC.numPregunta = DataSingleton.shared.cuestionarios[index].getNumPreguntaActual()
+        qVC.delegadoCuestionario = self
+        qVC.title = DataSingleton.shared.cuestionarios[index].getTema()
+        return qVC
+    }
+    
+    private func setupResumenController() -> ResumenSwipeController {
+        let rVC = ResumenSwipeController(collectionViewLayout: UICollectionViewLayout())
+        let viewControllers = fetchResumenController()
+        rVC.viewControllers = viewControllers
+        rVC.collectionView.reloadData()
+        rVC.pageControl.numberOfPages = viewControllers.count
+        rVC.pageControl.currentPage = 0
+        return rVC
+    }
+    
+    private func fetchResumenController() -> [UIViewController] {
+        var arr: [UIViewController] = []
+        let historietas = DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].historietas
+        for historieta in historietas {
+            let historietaController = HistorietaController()
+            historietaController.historieta = historieta
+            arr.append(historietaController)
+        }
+        arr.append(ResumenController())
+        return arr
+    }
 }
+
+
 
 // MARK: TableView Cell
 class TemaCell: UITableViewCell {

@@ -11,39 +11,30 @@ class DataSingleton {
     
     var cuestionarios: [Cuestionario]!
     var usuario: Usuario!
-    var preguntaActual: Int!
-    var cuestionarioActual: Int!
     
     private init() {
         print("Singleton initialized")
         setupUser()
-        extractData()
+        fetchData()
     }
     
     private func setupUser() {
         usuario = Usuario()
     }
     
-    private func extractData(){
-        if let path = Bundle.main.path(forResource: "cuestionarios", ofType: "json") {
+    private func fetchData(){
+        if let path = Bundle.main.path(forResource: "data", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                self.cuestionarios = try? JSONDecoder().decode([Cuestionario].self, from: data)
-            } catch {
-                print("Unexpected error: \(error).")
-            }
+                self.decode(data)
+            } catch { print("Unexpected error fetching data: \(error).") }
         }
     }
     
-    /**
-                GetCuestionario(indice)
-     Regresa un cuestionario        let cuestionario = DataSingleton.shared.getCuestionario(indice: indexPath.row) dado un índice
-     */
-    func getCuestionario(_ indice: Int) -> Cuestionario {
-        return self.cuestionarios[indice]
-    }
-
-    func getUsuario() -> Usuario {
-        return usuario
+    private func decode(_ data: Data) {
+        let decoder = JSONDecoder()
+        do {
+            self.cuestionarios = try decoder.decode([Cuestionario].self, from: data)
+        } catch { print("Unexpected error decoding data: \(error).") }
     }
 }

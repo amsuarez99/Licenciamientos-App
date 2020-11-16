@@ -4,12 +4,19 @@
 //
 //  Created by user180523 on 11/4/20.
 //
-
-import UIKit
 import Foundation
 
-struct Historieta {
-    let color : UIColor // foto
-    let headerText : String
-    let bodyText : String
+class Historieta: Codable {
+    private var foto : String
+    private var titulo : String
+    private var explicacion : String
+    
+    enum CodingKeys: CodingKey {
+        case foto
+        case titulo
+        case explicacion
+    }
+    
+    func getTitulo() -> String { return self.titulo }
+    func getExplicacion() -> String { return self.explicacion }
 }
