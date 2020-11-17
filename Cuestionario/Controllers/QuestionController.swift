@@ -76,10 +76,9 @@ class QuestionController: UIViewController{
             DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].preguntas[numPregunta].setOpcionSeleccionada(respuestaSeleccionada)
             DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].contestaCorrecto()
         } else {
-            print(pregunta.getFeedback())
+            DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].agregaFeedback(pregunta.getFeedback())
         }
         
-        // Pedir pregunta a delegado
         if let pregunta = delegadoCuestionario.getPregunta() {
             let qVC = QuestionController()
             qVC.title = self.title
@@ -123,6 +122,7 @@ class QuestionController: UIViewController{
         // Sets up Question
         tvPregunta.attributedText = NSMutableAttributedString(string: "Q\(self.numPregunta + 1): \(self.pregunta.getPregunta())", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
         lbProgreso.text = "Pregunta \(self.numPregunta + 1) de \(delegadoCuestionario.getNumPreguntas())"
+        print(DataSingleton.shared.usuario.cuestionarioActual)
         lbScore.text! += String(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getPuntaje()!)
         let labelsStackView = UIStackView(arrangedSubviews: [lbProgreso,lbScore])
         labelsStackView.translatesAutoresizingMaskIntoConstraints = false

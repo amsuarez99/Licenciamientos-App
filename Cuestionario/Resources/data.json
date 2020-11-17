@@ -48,8 +48,7 @@
       "tema": "Conceptos Básicos 2",
       "preguntaActual": 2,
       "puntaje": 1,
-      "feedBackAcum": ["feedback1", "feedback2", "feedback3"],
-      "calificacion": 70,
+      "feedBackAcum": ["Recuerda que la LFDA ..."],
       "preguntas": [
         {
           "pregunta": "La ley federal del derecho de autor tiene por objeto:",
@@ -61,6 +60,37 @@
           "indiceRespuesta": 1,
           "feedback": "Recuerda que la LFDA es ...",
           "opcionSeleccionada": 2,
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Sacaste mal esta pregunta",
+          "opcionSeleccionada": 1,
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ...",
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ...",
         }
       ],
       "leccion": {

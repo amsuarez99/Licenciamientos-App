@@ -34,10 +34,7 @@ class Cuestionario: Decodable {
         return Int( preguntaActual / preguntas.count ) * 100
     }
     
-    private var calificacion: Double? {
-        guard let puntaje = self.puntaje else { return nil }
-        return Double( puntaje / preguntas.count )
-    }
+    private var calificacion: Int?
     
     private var isDisponible: Bool = false
     
@@ -77,13 +74,20 @@ class Cuestionario: Decodable {
         return puntaje
     }
     func getProgreso() -> Int? { return self.progreso }
-    func getCalificacion() -> Double? {
-        guard let calificacion = self.calificacion else { return nil }
-        return calificacion
+    func getCalificacion() -> Int! {
+        self.calificacion = Int(Double(self.puntaje!) / Double(self.preguntas.count) * 100)
+        return self.calificacion!
+    }
+    func getFeedback() -> [String] {
+        guard let feedback = self.feedbackAcum else { return ["Excelente!"] }
+        return feedback
     }
     
+    func agregaFeedback(_ fb: String) -> Void {
+        feedbackAcum?.append(fb)
+    }
     
-    func startCuestionario() {
+    func startCuestionario() -> Void {
         self.preguntaActual = 0
         self.puntaje = 0
         self.feedbackAcum = []

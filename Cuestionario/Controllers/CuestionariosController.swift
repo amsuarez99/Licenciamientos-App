@@ -103,6 +103,7 @@ extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Sets the question controller and assigns it to self so that it can retrieve resumenController
+        DataSingleton.shared.usuario.cuestionarioActual = indexPath.row
         if DataSingleton.shared.cuestionarios[indexPath.row].getProgreso() == nil {
             DataSingleton.shared.cuestionarios[indexPath.row].startCuestionario()
         } else if DataSingleton.shared.cuestionarios[indexPath.row].getProgreso() == 100 {

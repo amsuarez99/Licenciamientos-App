@@ -8,8 +8,6 @@
 import UIKit
 
 class FeedbackController: UIViewController{
-
-    var calificacion: Double!
     
 //    var tableView : UITableView
     
@@ -51,14 +49,14 @@ class FeedbackController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getCalificacion()!)
         setupViews()
     }
     
     private func setupViews() {
         
-        let attributedText = NSMutableAttributedString(string: "Feedback", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.orangeTint])
-        attributedText.append(NSMutableAttributedString(string: "\n\nHola", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint]))
+        let attributedText = NSMutableAttributedString(string: "Calificación: \(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getCalificacion()!)", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.orangeTint])
+        let feedbackString = DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getFeedback().joined(separator: "\n")
+        attributedText.append(NSMutableAttributedString(string: "\n\n" + feedbackString, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint]))
         self.tvFeedback.attributedText = attributedText
         
         self.view.backgroundColor = .white
