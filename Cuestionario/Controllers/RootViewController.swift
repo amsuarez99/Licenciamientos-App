@@ -11,8 +11,8 @@ class RootViewController: UIViewController {
     
     private let titulo: UITextView = {
         let textView = UITextView()
-        let attributedText = NSMutableAttributedString(string: Constants.App.appName, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
-        attributedText.append(NSAttributedString(string: "\n\n\nAprende las bases de esta ley, así como los licenciamientos y recursos de uso libre.", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.lightGrayTint]))
+        let attributedText = NSMutableAttributedString(string: Constants.App.appName, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
+        attributedText.append(NSAttributedString(string: "\n\n\nAprende las bases de esta ley, así como los licenciamientos y recursos de uso libre.", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.lightGrayTint]))
         textView.attributedText = attributedText
         textView.textAlignment = .center
         textView.isEditable = false
@@ -56,7 +56,6 @@ class RootViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
     }
-    
    
     private func setupViews() {
         self.view.backgroundColor = .white

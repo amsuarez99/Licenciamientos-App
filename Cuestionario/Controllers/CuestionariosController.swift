@@ -9,6 +9,10 @@ import UIKit
 
 class CuestionariosController: UIViewController, cuestionarioController {
 
+    private var alerta: UIAlertController!
+    private var cancelar: UIAlertAction!
+    private var reiniciar: UIAlertAction!
+    
     private let tableView : UITableView = {
        let tv = UITableView()
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -17,7 +21,7 @@ class CuestionariosController: UIViewController, cuestionarioController {
     
     private let titulo: UITextView = {
         let textView = UITextView()
-        let attributedText = NSMutableAttributedString(string: "CUESTIONARIOS", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
+        let attributedText = NSMutableAttributedString(string: "CUESTIONARIOS", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
         textView.attributedText = attributedText
         textView.textAlignment = .center
         textView.isEditable = false
@@ -33,6 +37,7 @@ class CuestionariosController: UIViewController, cuestionarioController {
         self.tableView.separatorStyle = .none
         self.tableView.register(TemaCell.self, forCellReuseIdentifier: "cell")
         setupView()
+        setupAlerta()
     }
 
     private func setupView() {
@@ -98,13 +103,15 @@ extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Sets the question controller and assigns it to self so that it can retrieve resumenController
-        setupCuestionario(indexPath.row)
-        
-        // Sets up the question VC and pushes it to stack
+        if DataSingleton.shared.cuestionarios[indexPath.row].getProgreso() == nil {
+            DataSingleton.shared.cuestionarios[indexPath.row].startCuestionario()
+        } else if DataSingleton.shared.cuestionarios[indexPath.row].getProgreso() == 100 {
+            self.present(alerta, animated: true, completion: nil)
+            return
+        }
         let qVC = setupQuestionController(indexPath.row)
         self.navigationController?.pushViewController(qVC, animated: true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
         
         // Present resumen vc after a 0.5 second delay
         let rVC = setupResumenController()
@@ -112,14 +119,28 @@ extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
             self.present(rVC, animated: true, completion: nil)
         }
+        
     }
     
-    private func setupCuestionario(_ index: Int) {
-        DataSingleton.shared.usuario.cuestionarioActual = index
-        if DataSingleton.shared.cuestionarios[index].getProgreso() == 0 {
-            DataSingleton.shared.cuestionarios[index].startCuestionario()
+    private func setupAlerta() {
+        alerta = UIAlertController(title: "Alerta", message: "El cuestionario ya está terminado, ¿deseas reinciarlo?", preferredStyle: .alert)
+        reiniciar = UIAlertAction(title: "Reiniciar", style: .default, handler: { (action) -> Void in
+            DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].startCuestionario()
+            let innerAlerta = UIAlertController(title: "Alerta", message: "El cuestionario fue reiniciado", preferredStyle: .alert)
+            let ok =  UIAlertAction(title: "OK", style: .default, handler: nil)
+            innerAlerta.addAction(ok)
+            self.present(innerAlerta, animated: true, completion: nil)
+//            print("Usuario reinicia cuestionario")
+        })
+        cancelar = UIAlertAction(title: "Cancelar", style: .cancel) { (action) -> Void in
+//            print("Usuario cancela el reiniciado")
         }
+        
+        alerta.addAction(reiniciar)
+        alerta.addAction(cancelar)
     }
+    
+
     
     private func setupQuestionController(_ index: Int) -> QuestionController {
         let qVC = QuestionController()

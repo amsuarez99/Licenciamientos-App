@@ -24,6 +24,8 @@
 		C3A4D913255E2CF200876B06 /* Cuestionario.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A4D912255E2CF200876B06 /* Cuestionario.swift */; };
 		C3A4D918255F26FE00876B06 /* cuestionarios.json in Resources */ = {isa = PBXBuildFile; fileRef = C3A4D917255F26FE00876B06 /* cuestionarios.json */; };
 		C3A4D91B255F273D00876B06 /* DataSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A4D91A255F273D00876B06 /* DataSingleton.swift */; };
+		C3A4D92925634CD200876B06 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = C3A4D92825634CD200876B06 /* data.json */; };
+		C3A4D92C25634CF800876B06 /* Leccion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A4D92B25634CF800876B06 /* Leccion.swift */; };
 		C3B2286D255DE4C400FE6685 /* HistorietaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B2286C255DE4C400FE6685 /* HistorietaController.swift */; };
 		C3B22874255DE64100FE6685 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B22873255DE64100FE6685 /* RootViewController.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +50,8 @@
 		C3A4D912255E2CF200876B06 /* Cuestionario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cuestionario.swift; sourceTree = "<group>"; };
 		C3A4D917255F26FE00876B06 /* cuestionarios.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cuestionarios.json; sourceTree = "<group>"; };
 		C3A4D91A255F273D00876B06 /* DataSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSingleton.swift; sourceTree = "<group>"; };
+		C3A4D92825634CD200876B06 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		C3A4D92B25634CF800876B06 /* Leccion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leccion.swift; sourceTree = "<group>"; };
 		C3B2286C255DE4C400FE6685 /* HistorietaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorietaController.swift; sourceTree = "<group>"; };
 		C3B22873255DE64100FE6685 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +107,7 @@
 				C3A4D90A255E0A2000876B06 /* Pregunta.swift */,
 				C3A4D912255E2CF200876B06 /* Cuestionario.swift */,
 				C3A4D91A255F273D00876B06 /* DataSingleton.swift */,
+				C3A4D92B25634CF800876B06 /* Leccion.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -111,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				C3A4D917255F26FE00876B06 /* cuestionarios.json */,
+				C3A4D92825634CD200876B06 /* data.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -198,6 +204,7 @@
 				AC626ABD25510B4D00B1C8AE /* LaunchScreen.storyboard in Resources */,
 				AC626ABA25510B4D00B1C8AE /* Assets.xcassets in Resources */,
 				C3A4D918255F26FE00876B06 /* cuestionarios.json in Resources */,
+				C3A4D92925634CD200876B06 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +226,7 @@
 				C3A4D913255E2CF200876B06 /* Cuestionario.swift in Sources */,
 				ACF6A1E82553929B007EB253 /* FeedbackController.swift in Sources */,
 				AC80EF3F2552A93500087E62 /* PageCell.swift in Sources */,
+				C3A4D92C25634CF800876B06 /* Leccion.swift in Sources */,
 				C3A4D91B255F273D00876B06 /* DataSingleton.swift in Sources */,
 				AC626AB325510B4C00B1C8AE /* SceneDelegate.swift in Sources */,
 				C3A4D90B255E0A2000876B06 /* Pregunta.swift in Sources */,
@@ -276,6 +284,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Licenciamientos;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -337,6 +346,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Licenciamientos;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

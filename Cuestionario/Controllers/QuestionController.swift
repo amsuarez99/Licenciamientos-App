@@ -49,7 +49,7 @@ class QuestionController: UIViewController{
     
     private let tvPregunta: UITextView = {
        let textView = UITextView()
-        let attributedText = NSMutableAttributedString(string: "Q1: La ley Federal del Derecho de Autor tiene por objeto: ", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
+        let attributedText = NSMutableAttributedString(string: "Q1: La ley Federal del Derecho de Autor tiene por objeto: ", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
         textView.attributedText = attributedText
         textView.isEditable = false
         textView.isScrollEnabled = false
@@ -121,9 +121,9 @@ class QuestionController: UIViewController{
         
         self.view.backgroundColor = .white
         // Sets up Question
-        tvPregunta.attributedText = NSMutableAttributedString(string: "Q\(self.numPregunta + 1): \(self.pregunta.getPregunta())", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
+        tvPregunta.attributedText = NSMutableAttributedString(string: "Q\(self.numPregunta + 1): \(self.pregunta.getPregunta())", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
         lbProgreso.text = "Pregunta \(self.numPregunta + 1) de \(delegadoCuestionario.getNumPreguntas())"
-        lbScore.text! += String(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getPuntaje())
+        lbScore.text! += String(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getPuntaje()!)
         let labelsStackView = UIStackView(arrangedSubviews: [lbProgreso,lbScore])
         labelsStackView.translatesAutoresizingMaskIntoConstraints = false
         labelsStackView.distribution = .fillEqually
@@ -198,7 +198,7 @@ extension QuestionController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        CGFloat(cellHeight)
+        CGFloat(self.cellHeight)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

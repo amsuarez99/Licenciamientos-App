@@ -9,6 +9,8 @@ import UIKit
 
 class FeedbackController: UIViewController{
 
+    var calificacion: Double!
+    
 //    var tableView : UITableView
     
     private let imageView: UIView = {
@@ -44,11 +46,12 @@ class FeedbackController: UIViewController{
     }()
     
     @IBAction private func terminarCuestionario() {
-        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToViewController((self.navigationController?.viewControllers[1])!, animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getCalificacion()!)
         setupViews()
     }
     

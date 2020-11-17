@@ -29,14 +29,14 @@ class Cuestionario: Decodable {
     private var terminado: Bool {
         return preguntaActual == preguntas.count
     }
-    private var progreso: Int {
-        guard let preguntaActual = self.preguntaActual else { return 0 }
-        return Int( preguntaActual / preguntas.count )
+    private var progreso: Int? {
+        guard let preguntaActual = self.preguntaActual else { return nil }
+        return Int( preguntaActual / preguntas.count ) * 100
     }
     
-    private var calificacion: Int? {
+    private var calificacion: Double? {
         guard let puntaje = self.puntaje else { return nil }
-        return Int( puntaje / preguntas.count )
+        return Double( puntaje / preguntas.count )
     }
     
     private var isDisponible: Bool = false
@@ -63,16 +63,25 @@ class Cuestionario: Decodable {
         self.historietas = try container.decode([Historieta].self, forKey: .historietas)
     }
     
-    func getNumPreguntaActual() -> Int { return self.preguntaActual! }
+    func getNumPreguntaActual() -> Int? {
+        guard let preguntaActual = self.preguntaActual else { return nil }
+        return preguntaActual
+    }
+    
     func getNumPreguntas() -> Int { return self.preguntas.count }
-    func getPreguntaActual() -> Pregunta {return self.preguntas[preguntaActual!]}
+    func getPreguntaActual() -> Pregunta {return self.preguntas[self.preguntaActual!]}
     func getHistorietas() -> [Historieta] { return self.historietas }
     func getTema() -> String { return self.tema }
-    func getPuntaje() -> Int {
-        guard let puntaje = self.puntaje else { return 0 }
+    func getPuntaje() -> Int? {
+        guard let puntaje = self.puntaje else { return nil }
         return puntaje
     }
-    func getProgreso() -> Int { return self.progreso }
+    func getProgreso() -> Int? { return self.progreso }
+    func getCalificacion() -> Double? {
+        guard let calificacion = self.calificacion else { return nil }
+        return calificacion
+    }
+    
     
     func startCuestionario() {
         self.preguntaActual = 0

@@ -14,7 +14,7 @@ extension NSMutableAttributedString {
     func bold(_ value:String) -> NSMutableAttributedString {
 
         let attributes:[NSAttributedString.Key : Any] = [
-            .font : Constants.App.Fonts.markupFont
+            .font : Constants.App.Fonts.markupFont!
         ]
 
         self.append(NSAttributedString(string: value, attributes:attributes))
@@ -24,7 +24,7 @@ extension NSMutableAttributedString {
     func normal(_ value:String) -> NSMutableAttributedString {
 
         let attributes:[NSAttributedString.Key : Any] = [
-            .font : Constants.App.Fonts.textFont
+            .font : Constants.App.Fonts.textFont!
         ]
 
         self.append(NSAttributedString(string: value, attributes:attributes))
@@ -78,7 +78,7 @@ class ResumenController: UIViewController{
         
         var attributes: [NSAttributedString.Key: Any] = [
             .paragraphStyle: paragraphStyle,
-            .font: Constants.App.Fonts.titleFont
+            .font: Constants.App.Fonts.titleFont!
         ]
         let attributedText = NSMutableAttributedString(string: "¿QUÉ DICE LA LEY?", attributes: attributes)
 
