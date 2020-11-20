@@ -1,10 +1,8 @@
 [
     {
       "tema": "Conceptos Básicos",
-      "preguntaActual": "nil",
-      "puntaje": "nil",
-      "feedBackAcum": "nil",
-      "calificacion": "nil",
+      "foto": "t1-star",
+      "disponible": true,
       "preguntas": [
         {
           "pregunta": "La ley federal del derecho de autor tiene por objeto:",
@@ -14,8 +12,17 @@
             "Pagarle a los autores por cada obra literaria que realice"
           ],
           "indiceRespuesta": 1,
-          "feedback": "Recuerda que la LFDA es ...",
-          "opcionSeleccionada": "nil",
+          "feedback": "Recuerda que la LFDA es ..."
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ..."
         }
       ],
       "leccion": {
@@ -30,21 +37,22 @@
           {
               "foto":"foto1",
               "titulo":"Caso1",
-              "descripcion":"En este caso, pasa que ..."
+              "explicacion":"En este caso, pasa que ..."
           },
           {
               "foto":"foto2",
               "titulo":"Caso2",
-              "descripcion":"En este caso, pasa esto otro ..."
+              "explicacion":"En este caso, pasa esto otro ..."
           }
         ]
     },
     {
       "tema": "Conceptos Básicos 2",
+      "disponible": false,
       "preguntaActual": 2,
+      "foto": "t2-star",
       "puntaje": 1,
-      "feedBackAcum": ["feedback1", "feedback2", "feedback3"],
-      "calificacion": 70,
+      "feedbackAcum": ["Recuerda que la LFDA ..."],
       "preguntas": [
         {
           "pregunta": "La ley federal del derecho de autor tiene por objeto:",
@@ -56,6 +64,37 @@
           "indiceRespuesta": 1,
           "feedback": "Recuerda que la LFDA es ...",
           "opcionSeleccionada": 2,
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Sacaste mal esta pregunta",
+          "opcionSeleccionada": 1,
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ...",
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ...",
         }
       ],
       "leccion": {
@@ -64,20 +103,204 @@
               "Concepto 2",
               "Concepto 3"
           ],
-          "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ligula sit amet ante scelerisque mollis. Mauris quis velit tempus, scelerisque nulla scelerisque, cursus nunc. Maecenas augue velit"
+          "texto": "Este es el segundo texto ... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ligula sit amet ante scelerisque mollis. Mauris quis velit tempus, scelerisque nulla scelerisque, cursus nunc. Maecenas augue velit"
       },
       "historietas": [
           {
               "foto":"foto1",
-              "titulo":"Caso1",
-              "descripcion":"En este caso, pasa que ..."
+              "titulo":"Caso3",
+              "explicacion":"En este caso, pasa que aaaabbbccc..."
           },
           {
               "foto":"foto2",
-              "titulo":"Caso2",
-              "descripcion":"En este caso, pasa esto otro ..."
+              "titulo":"Caso4",
+              "explicacion":"En este caso, pasa estooosososu ..."
           }
         ]
     },
+    {
+      "tema": "Conceptos Básicos 2",
+      "disponible": false,
+      "preguntaActual": 2,
+      "foto": "t2-star",
+      "puntaje": 1,
+      "feedbackAcum": ["Recuerda que la LFDA ..."],
+      "preguntas": [
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ...",
+          "opcionSeleccionada": 2,
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Sacaste mal esta pregunta",
+          "opcionSeleccionada": 1,
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ...",
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ...",
+        }
+      ],
+      "leccion": {
+          "conceptosClave": [
+              "Concepto 1",
+              "Concepto 2",
+              "Concepto 3"
+          ],
+          "texto": "Este es el segundo texto ... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ligula sit amet ante scelerisque mollis. Mauris quis velit tempus, scelerisque nulla scelerisque, cursus nunc. Maecenas augue velit"
+      },
+      "historietas": [
+          {
+              "foto":"foto1",
+              "titulo":"Caso3",
+              "explicacion":"En este caso, pasa que aaaabbbccc..."
+          },
+          {
+              "foto":"foto2",
+              "titulo":"Caso4",
+              "explicacion":"En este caso, pasa estooosososu ..."
+          }
+        ]
+    }
     
 ]
+
+ 
+ {
+   "tema": "Derecho Moral y Derecho Patrimonial",
+   "foto": "t2-star",
+   "disponible": false,
+   "preguntas": [
+     {
+       "pregunta": "¿Quiénes pueden ejercer este derecho?",
+       "opciones": [
+         "Solamente el estado.",
+         "El autor y sus hermanos.",
+         "Solamente el autor, ante su ausencia, el heredero o, en caso de que no haya, el Estado."
+       ],
+       "indiceRespuesta": 2,
+       "feedback": "Recuerda que el derecho es del autor, en su ausencia es del heredero"
+     },
+     {
+       "pregunta": "¿El reconocimiento de la autoría tiene que ser obligatoriamente el nombre que aparece en el acta de nacimiento del autor?",
+       "opciones": [
+         "Verdadero.",
+         "No, nombre completo e iniciales posteriormente.",
+         "No, también se puede utilizar un seudónimo."
+       ],
+       "indiceRespuesta": 2,
+       "feedback": "Con que tenga referencia al autor, se puede utilizar un seudónimo."
+     },
+     {
+       "pregunta": "Son acciones que el autor decide si se realizan o no:",
+       "opciones": [
+         "Determinar si la obra se publica o no y si se puede modificar o no.",
+         "Solamente determinar si la obra se publica.",
+         "Solamente determinar si se puede modificar o no."
+       ],
+       "indiceRespuesta": 0,
+       "feedback": "Recuerda que el autor puede hacer lo que quiera con su obra."
+     },
+     {
+       "pregunta": "El derecho moral le permite al autor oponerse en caso de que se le atribuya una obra que no es de su autoría.",
+       "opciones": [
+         "Verdadero",
+         "Falso"
+       ],
+       "indiceRespuesta": 0,
+       "feedback": "Es el punto principal de este derecho"
+     },
+     {
+       "pregunta": "¿Durante cuánto tiempo ejerce este derecho el autor?",
+       "opciones": [
+         "Durante toda su vida y permanece vigente hasta cien años después de su muerte.",
+         "Solamente durante toda su vida.",
+         "50 años despues de la publicación."
+       ],
+       "indiceRespuesta": 0,
+       "feedback": "Recuerda que el derecho tambien se queda durante cien años despues de su muerte"
+     },
+     {
+       "pregunta": "¿Qué pasa después de ese tiempo?",
+       "opciones": [
+         "La obra se queda privada.",
+         "La obra se convierte en dominio público.",
+         "El derecho se pasa a algun familiar del autor."
+       ],
+       "indiceRespuesta": 1,
+       "feedback": "Si la obra ya no tiene dueño se convierte en dominio publico."
+     },
+     {
+       "pregunta": "¿Por qué todo acto relacionado con derechos de autor debe tener una constancia por escrito?",
+       "opciones": [
+         "Porque de lo contrario los derechos serán nulos.",
+         "Porque de lo contrario se mete una demanda al autor.",
+         "No es obligatorio una constancia por escrito."
+       ],
+       "indiceRespuesta": 0,
+       "feedback": "Recuerda que es necesario tener una constancia para mantenerlo legal."
+     },
+     {
+       "pregunta": "Gracias al derecho patrimonial el autor es sujeto a recibir remuneraciones económicas (regalías).",
+       "opciones": [
+         "Verdadero.",
+         "Falso.",
+       ],
+       "indiceRespuesta": 0,
+       "feedback": "El derecho patrimonial es susceptible de tener un valor económico y se contrapone a los derechos extrapatrimoniales"
+     }
+   ],
+   "leccion": {
+       "conceptosClave": [
+           "Concepto 1",
+           "Concepto 2",
+           "Concepto 3"
+       ],
+       "texto": "Derecho Moral: Consiste en el reconocimiento de la autoría de una obra original.\nEs inalienable, imprescriptible, irrenunciable inembargable.\nDerecho Patrimonial: Permiten la explotación económica de la obra. El autor es quien puede adjudicar licencias de uso."
+   },
+   "historietas": [
+       {
+           "foto":"abuelo1",
+           "titulo":"Creación de una obra",
+           "explicacion":"El abuelo Scott, después de muchos años, por fin pudo completar la creación de su libro."
+       },
+       {
+           "foto":"abuelo2",
+           "titulo":"Una muerte trágica",
+           "explicacion":"Desafortunadamente durante la edición del mismo el abuelo Scott faleció..."
+       },
+       {
+           "foto":"abuelo3",
+           "titulo":"Estado creador",
+           "explicacion":"Como el abuelo no contaba con ningún heredero, el Estado tuvo que tomar cartas en el asunto y quedarse con todos los derechos."
+       }
+   ]
+ },

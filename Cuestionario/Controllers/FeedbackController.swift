@@ -9,21 +9,18 @@ import UIKit
 
 class FeedbackController: UIViewController{
     
-//    var tableView : UITableView
+    private var calificacion: Int!
     
-    private let imageView: UIView = {
-        let iv = UIView()
-        iv.backgroundColor = .lightGray
+    private let imageView: UIImageView = {
+        let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFit
         return iv
     }()
     
     
     private let tvFeedback: UITextView = {
        let textView = UITextView()
-        let attributedText = NSMutableAttributedString(string: "Feedback", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.orangeTint])
-        attributedText.append(NSMutableAttributedString(string: "\n\nRecuerda que la LFDA establece que se debe de ... Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pharetra velit quis vulputate iaculis.", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint]))
-        textView.attributedText = attributedText
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -43,36 +40,30 @@ class FeedbackController: UIViewController{
         return btn
     }()
     
-    @IBAction private func terminarCuestionario() {
-        self.navigationController?.popToViewController((self.navigationController?.viewControllers[1])!, animated: true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        calificacion = DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getCalificacion()!
         setupViews()
+        setupFeedbackText()
     }
     
     private func setupViews() {
         
-        let attributedText = NSMutableAttributedString(string: "Calificación: \(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getCalificacion()!)", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.orangeTint])
-        let feedbackString = DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getFeedback().joined(separator: "\n")
-        attributedText.append(NSMutableAttributedString(string: "\n\n" + feedbackString, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint]))
-        self.tvFeedback.attributedText = attributedText
-        
         self.view.backgroundColor = .white
+        
         let topPortionView = UIView()
         topPortionView.translatesAutoresizingMaskIntoConstraints = false
-        topPortionView.backgroundColor = .systemIndigo
         view.addSubview(topPortionView)
         
         NSLayoutConstraint.activate([
             topPortionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             topPortionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             topPortionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            topPortionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.50)
+            topPortionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.40)
         ])
         
         topPortionView.addSubview(imageView)
+        imageView.image = calificacion < 70 ? UIImage(named: "commitment") : UIImage(named: DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getFoto())
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: topPortionView.centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: topPortionView.centerYAnchor),
@@ -98,4 +89,35 @@ class FeedbackController: UIViewController{
         
     }
 
+    private func setupFeedbackText (){
+       
+        let attributedText = NSMutableAttributedString(string: "Calificación: \(calificacion!)", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.orangeTint])
+        var feedbackString: String = ""
+        switch calificacion! {
+        case 0:
+            feedbackString = "Asegurate de leer bien la lección y prestar atención a las historietas.\n¡Sigue intentándolo!\n\nRecuerda que:\n"
+        case 70...99:
+            feedbackString = "Felicidades, ¡obtuviste una calificación aprobatoria y conseguiste la medalla para este tema!\n\nSolamente recuerda que:\n"
+            
+        case 100:
+            feedbackString = "¡Obtuviste la calificación máxima y conseguiste la medalla de este tema!"
+
+        default:
+            feedbackString = "¡Falta poco para el 70!\n\nRecuerda que:\n"
+        }
+        feedbackString.append(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getFeedback().joined(separator: "\n"))
+        
+        attributedText.append(NSMutableAttributedString(string: "\n\n" + feedbackString, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint]))
+        
+        self.tvFeedback.attributedText = attributedText
+    }
+    
+    @IBAction private func terminarCuestionario() {
+        let cuestionarioActual = DataSingleton.shared.usuario.cuestionarioActual
+        let nextCuestionario = DataSingleton.shared.usuario.cuestionarioActual + 1
+        if nextCuestionario < DataSingleton.shared.cuestionarios.count && calificacion! >= 70 { DataSingleton.shared.cuestionarios[nextCuestionario].isDisponible(true)
+        }
+
+        self.navigationController?.popToViewController((self.navigationController?.viewControllers[1])!, animated: true)
+    }
 }

@@ -15,4 +15,8 @@ class Leccion: Codable {
         case conceptosClave
         case texto
     }
+    
+    func getTexto() -> String {
+        return self.texto
+    }
 }

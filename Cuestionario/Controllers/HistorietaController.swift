@@ -13,9 +13,7 @@ class HistorietaController: UIViewController {
         didSet {
             
             guard let unwrappedHistorieta = historieta else { return }
-            
-            imageView.backgroundColor = .systemIndigo
-            
+            imageView.image = UIImage(named:unwrappedHistorieta.getFoto())
             let attributedText = NSMutableAttributedString(string: unwrappedHistorieta.getTitulo(), attributes: [NSAttributedString.Key.font: Constants.App.Fonts.titleFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
             attributedText.append(NSAttributedString(string: "\n\n\n\(unwrappedHistorieta.getExplicacion())", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.lightGrayTint]))
             
@@ -24,10 +22,10 @@ class HistorietaController: UIViewController {
         }
     }
     
-    private let imageView: UIView = {
-        let view = UIView()
+    private let imageView: UIImageView = {
+        let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .yellow
+        view.contentMode = .scaleAspectFit
         return view
     }()
     
@@ -67,7 +65,7 @@ class HistorietaController: UIViewController {
         topImageContainerView.addSubview(imageView)
         imageView.centerXAnchor.constraint(equalTo: topImageContainerView.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: topImageContainerView.centerYAnchor).isActive = true
-        imageView.heightAnchor.constraint(equalTo: topImageContainerView.heightAnchor, multiplier: 0.5).isActive = true
+        imageView.heightAnchor.constraint(equalTo: topImageContainerView.heightAnchor, multiplier: 0.6).isActive = true
         imageView.widthAnchor.constraint(equalTo: topImageContainerView.widthAnchor, multiplier: 0.5).isActive = true
         
         self.view.addSubview(descriptionTextView)

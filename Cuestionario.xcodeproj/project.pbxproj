@@ -19,6 +19,7 @@
 		AC80EF3F2552A93500087E62 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC80EF3E2552A93500087E62 /* PageCell.swift */; };
 		ACEDCE5D25534765002B12ED /* Historieta.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEDCE5C25534765002B12ED /* Historieta.swift */; };
 		ACF6A1E82553929B007EB253 /* FeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF6A1E72553929B007EB253 /* FeedbackController.swift */; };
+		C3546A74256843B400E6B974 /* MedallasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3546A73256843B400E6B974 /* MedallasController.swift */; };
 		C3A4D90B255E0A2000876B06 /* Pregunta.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A4D90A255E0A2000876B06 /* Pregunta.swift */; };
 		C3A4D910255E0C6500876B06 /* Usuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A4D90F255E0C6500876B06 /* Usuario.swift */; };
 		C3A4D913255E2CF200876B06 /* Cuestionario.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A4D912255E2CF200876B06 /* Cuestionario.swift */; };
@@ -45,6 +46,7 @@
 		AC80EF3E2552A93500087E62 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PageCell.swift; path = Cuestionario/Controllers/PageCell.swift; sourceTree = SOURCE_ROOT; };
 		ACEDCE5C25534765002B12ED /* Historieta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Historieta.swift; sourceTree = "<group>"; };
 		ACF6A1E72553929B007EB253 /* FeedbackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackController.swift; sourceTree = "<group>"; };
+		C3546A73256843B400E6B974 /* MedallasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedallasController.swift; sourceTree = "<group>"; };
 		C3A4D90A255E0A2000876B06 /* Pregunta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pregunta.swift; sourceTree = "<group>"; };
 		C3A4D90F255E0C6500876B06 /* Usuario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usuario.swift; sourceTree = "<group>"; };
 		C3A4D912255E2CF200876B06 /* Cuestionario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cuestionario.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				AC80EF32255289D900087E62 /* QuestionController.swift */,
 				C3B2286C255DE4C400FE6685 /* HistorietaController.swift */,
 				C3B22873255DE64100FE6685 /* RootViewController.swift */,
+				C3546A73256843B400E6B974 /* MedallasController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				AC626AB125510B4C00B1C8AE /* AppDelegate.swift in Sources */,
 				C3A4D913255E2CF200876B06 /* Cuestionario.swift in Sources */,
 				ACF6A1E82553929B007EB253 /* FeedbackController.swift in Sources */,
+				C3546A74256843B400E6B974 /* MedallasController.swift in Sources */,
 				AC80EF3F2552A93500087E62 /* PageCell.swift in Sources */,
 				C3A4D92C25634CF800876B06 /* Leccion.swift in Sources */,
 				C3A4D91B255F273D00876B06 /* DataSingleton.swift in Sources */,

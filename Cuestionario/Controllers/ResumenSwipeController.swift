@@ -46,7 +46,6 @@ class ResumenSwipeController: UICollectionViewController, UICollectionViewDelega
     @IBAction private func handleNext() {
         let nextIndex = min(pageControl.currentPage + 1, viewControllers.count - 1)
         let indexPath = IndexPath(item: nextIndex, section: 0)
-        print(nextIndex)
         pageControl.currentPage = nextIndex
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
@@ -69,7 +68,6 @@ class ResumenSwipeController: UICollectionViewController, UICollectionViewDelega
         
         self.view.backgroundColor = .white
         setupBotones()
-        setupViewControllers()
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.showsHorizontalScrollIndicator = false
@@ -81,10 +79,6 @@ class ResumenSwipeController: UICollectionViewController, UICollectionViewDelega
         let newPage = Int(x / view.frame.width)
         pageControl.currentPage = newPage
        
-    }
-    
-    private func setupViewControllers() {
-        
     }
     
     private func setupBotones() {

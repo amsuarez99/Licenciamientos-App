@@ -73,22 +73,22 @@ class ResumenController: UIViewController{
     
     private let titulo: UITextView = {
        let textView = UITextView()
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
+        let centerPS = NSMutableParagraphStyle()
+        centerPS.alignment = .center
+        let justifiedPS = NSMutableParagraphStyle()
+        justifiedPS.alignment = .justified
         
         var attributes: [NSAttributedString.Key: Any] = [
-            .paragraphStyle: paragraphStyle,
+            .paragraphStyle: centerPS,
             .font: Constants.App.Fonts.titleFont!
         ]
         let attributedText = NSMutableAttributedString(string: "¿QUÉ DICE LA LEY?", attributes: attributes)
-
-        attributedText.normal("\n\n\nLa ").bold("Ley Federal del Derecho de Autor").normal(" define a una").bold(" obra ").normal("como: ").normal("Sed rhoncus tincidunt mi. In consequat a lectus suscipit tristique. Proin vestibulum tortor vel leo sagittis tempus. In hac habitasse platea dictumst.\n\n")
-        attributedText.bold("Ley federal del derecho de autor: ").normal("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tellus arcu, bibendum at tincidunt quis, laoreet nec enim. Sed nunc urna, rhoncus at sollicitudin at, rhoncus eu nunc. Sed rhoncus tincidunt mi. In consequat a lectus suscipit tristique. Proin vestibulum tortor vel leo sagittis tempus. In hac habitasse platea dictumst.\n\n\n")
+        let stringText = DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getLeccion().getTexto()
+        attributedText.append(NSMutableAttributedString(string: "\n\n" + stringText, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint, NSAttributedString.Key.paragraphStyle: justifiedPS]))
         textView.attributedText = attributedText
         textView.isEditable = false
-        textView.isScrollEnabled = false
+        textView.isScrollEnabled = true
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.backgroundColor = .lightGray
         return textView
     }()
 
@@ -101,9 +101,6 @@ class ResumenController: UIViewController{
     private func setupViews() {
         let textoContainerView = UIView()
         textoContainerView.translatesAutoresizingMaskIntoConstraints = false
-        textoContainerView.backgroundColor = .lightGray
-        textoContainerView.layer.cornerRadius = 10
-        textoContainerView.clipsToBounds = true
         self.view.addSubview(textoContainerView)
         NSLayoutConstraint.activate([
             textoContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),

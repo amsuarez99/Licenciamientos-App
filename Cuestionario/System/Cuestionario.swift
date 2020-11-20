@@ -16,11 +16,11 @@ import UIKit
 
 class Cuestionario: Decodable {
     private var tema: String
+    private var foto: String
     private var preguntaActual: Int?
     private var puntaje: Int?
     private var feedbackAcum: [String]?
-    private var empezado: Bool = false
-    
+    private var disponible: Bool?
     
     var preguntas: [Pregunta]
     var leccion: Leccion
@@ -36,22 +36,23 @@ class Cuestionario: Decodable {
     
     private var calificacion: Int?
     
-    private var isDisponible: Bool = false
-    
     enum CodingKeys: CodingKey {
         case tema
+        case disponible
         case preguntaActual
         case puntaje
         case feedbackAcum
         case preguntas
         case leccion
         case historietas
+        case foto
     }
-    
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.tema = try container.decode(String.self, forKey: .tema)
+        self.foto = try container.decode(String.self, forKey: .foto)
+        self.disponible = try container.decode(Bool.self, forKey: .disponible)
         self.preguntaActual = try container.decodeIfPresent(Int.self, forKey: .preguntaActual)
         self.puntaje = try container.decodeIfPresent(Int.self, forKey: .puntaje)
         self.feedbackAcum = try container.decodeIfPresent([String].self, forKey: .feedbackAcum)
@@ -60,38 +61,46 @@ class Cuestionario: Decodable {
         self.historietas = try container.decode([Historieta].self, forKey: .historietas)
     }
     
+
+    func getNumPreguntas() -> Int { return self.preguntas.count }
+    func getPreguntaActual() -> Pregunta {return self.preguntas[self.preguntaActual!]}
+    func getHistorietas() -> [Historieta] { return self.historietas }
+    func getTema() -> String { return self.tema }
+    func getProgreso() -> Int? { return self.progreso }
+    func getLeccion() -> Leccion { return self.leccion }
+    func getFeedback() -> [String] { return self.feedbackAcum! }
+    func getFoto() -> String { return self.foto }
+    func getPuntaje() -> Int? {
+        guard let puntaje = self.puntaje else { return nil }
+        return puntaje
+    }
+    func getCalificacion() -> Int! {
+        self.calificacion = Int(Double(self.puntaje!) / Double(self.preguntas.count) * 100)
+        return self.calificacion!
+    }
     func getNumPreguntaActual() -> Int? {
         guard let preguntaActual = self.preguntaActual else { return nil }
         return preguntaActual
     }
     
-    func getNumPreguntas() -> Int { return self.preguntas.count }
-    func getPreguntaActual() -> Pregunta {return self.preguntas[self.preguntaActual!]}
-    func getHistorietas() -> [Historieta] { return self.historietas }
-    func getTema() -> String { return self.tema }
-    func getPuntaje() -> Int? {
-        guard let puntaje = self.puntaje else { return nil }
-        return puntaje
-    }
-    func getProgreso() -> Int? { return self.progreso }
-    func getCalificacion() -> Int! {
-        self.calificacion = Int(Double(self.puntaje!) / Double(self.preguntas.count) * 100)
-        return self.calificacion!
-    }
-    func getFeedback() -> [String] {
-        guard let feedback = self.feedbackAcum else { return ["Excelente!"] }
-        return feedback
-    }
     
     func agregaFeedback(_ fb: String) -> Void {
         feedbackAcum?.append(fb)
+    }
+    
+    func isDisponible() -> Bool {
+        return self.disponible!
+    }
+    
+    func isDisponible(_ b: Bool) -> Void {
+        self.disponible = b
     }
     
     func startCuestionario() -> Void {
         self.preguntaActual = 0
         self.puntaje = 0
         self.feedbackAcum = []
-        self.empezado = true
+        self.disponible = true
     }
     func contestaPregunta() -> Void { self.preguntaActual = self.preguntaActual! + 1 }
     func isTerminado() -> Bool { return self.terminado }

@@ -1,0 +1,121 @@
+[
+    {
+      "tema": "Conceptos Básicos",
+      "disponible": true,
+      "preguntas": [
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ..."
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ..."
+        }
+      ],
+      "leccion": {
+          "conceptosClave": [
+              "Concepto 1",
+              "Concepto 2",
+              "Concepto 3"
+          ],
+          "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ligula sit amet ante scelerisque mollis. Mauris quis velit tempus, scelerisque nulla scelerisque, cursus nunc. Maecenas augue velit"
+      },
+      "historietas": [
+          {
+              "foto":"foto1",
+              "titulo":"Caso1",
+              "explicacion":"En este caso, pasa que ..."
+          },
+          {
+              "foto":"foto2",
+              "titulo":"Caso2",
+              "explicacion":"En este caso, pasa esto otro ..."
+          }
+        ]
+    },
+    {
+      "tema": "Conceptos Básicos 2",
+      "disponible": false,
+      "preguntaActual": 2,
+      "puntaje": 1,
+      "feedbackAcum": ["Recuerda que la LFDA ..."],
+      "preguntas": [
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ...",
+          "opcionSeleccionada": 2,
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Sacaste mal esta pregunta",
+          "opcionSeleccionada": 1,
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ...",
+        },
+        {
+          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "opciones": [
+            "Reconocer a los autores de obras literarias",
+            "La salvaguarda y promoción del acervo cultural de la Nación",
+            "Pagarle a los autores por cada obra literaria que realice"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Recuerda que la LFDA es ...",
+        }
+      ],
+      "leccion": {
+          "conceptosClave": [
+              "Concepto 1",
+              "Concepto 2",
+              "Concepto 3"
+          ],
+          "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ligula sit amet ante scelerisque mollis. Mauris quis velit tempus, scelerisque nulla scelerisque, cursus nunc. Maecenas augue velit"
+      },
+      "historietas": [
+          {
+              "foto":"foto1",
+              "titulo":"Caso3",
+              "explicacion":"En este caso, pasa que aaaabbbccc..."
+          },
+          {
+              "foto":"foto2",
+              "titulo":"Caso4",
+              "explicacion":"En este caso, pasa estooosososu ..."
+          }
+        ]
+    },
+    
+]
+

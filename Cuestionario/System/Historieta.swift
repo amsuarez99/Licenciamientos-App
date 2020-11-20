@@ -19,4 +19,5 @@ class Historieta: Codable {
     
     func getTitulo() -> String { return self.titulo }
     func getExplicacion() -> String { return self.explicacion }
+    func getFoto() -> String { return self.foto }
 }

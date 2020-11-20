@@ -43,7 +43,7 @@ class RootViewController: UIViewController {
         btn.layer.cornerRadius = 5
         btn.clipsToBounds = true
         btn.translatesAutoresizingMaskIntoConstraints = false
-        //        btn.addTarget(self, action: #selector(btnCuestionariosAction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(btnMedallasAction), for: .touchUpInside)
         return btn
     }()
     
@@ -52,11 +52,20 @@ class RootViewController: UIViewController {
         self.navigationController?.pushViewController(cuestionarioVC, animated: true)
     }
     
+    @IBAction private func btnMedallasAction() {
+        let medallaVC = MedallasController(collectionViewLayout: UICollectionViewLayout())
+        self.navigationController?.pushViewController(medallaVC, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     private func setupViews() {
         self.view.backgroundColor = .white
         let textoContainerView = UIView()

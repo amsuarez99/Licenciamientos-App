@@ -1,26 +1,48 @@
 [
     {
       "tema": "Conceptos Básicos",
+      "foto": "t1-star",
+      "disponible": true,
       "preguntas": [
         {
-          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "pregunta": "¿Qué deberán incluir las obras protegidas?",
           "opciones": [
-            "Reconocer a los autores de obras literarias",
-            "La salvaguarda y promoción del acervo cultural de la Nación",
-            "Pagarle a los autores por cada obra literaria que realice"
+            "El nombre del autor seguida del símbolo de copyright.",
+            "La expresión “Derechos Reservados” seguida del símbolo de copyright.",
+            "Solamente el simbolo de copyright."
           ],
           "indiceRespuesta": 1,
-          "feedback": "Recuerda que la LFDA es ..."
+          "feedback": "Las obras protegidas deben incluir solamente la expresión con el simbolo."
         },
         {
-          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "pregunta": "¿Qué pasa si omites los requisitos para proteger tu obra?",
           "opciones": [
-            "Reconocer a los autores de obras literarias",
-            "La salvaguarda y promoción del acervo cultural de la Nación",
-            "Pagarle a los autores por cada obra literaria que realice"
+            "No exime del error a la persona que cometió el mal uso de tu obra, pero esta pudiera recibir una multa penal o económica menor.",
+            "Cualquier persona puede utilizar tu obra sin ser demandada.",
+            "Se hace una demanda al autor al no ponerlos."
           ],
-          "indiceRespuesta": 1,
-          "feedback": "Recuerda que la LFDA es ..."
+          "indiceRespuesta": 0,
+          "feedback": "Omitir los requisitos lleva a una penalización pequeña."
+        },
+        {
+          "pregunta": "Son algunas obras que pueden contar con derechos de autor:",
+          "opciones": [
+            "Obras literarias, música (con o sin letra), danza, caricaturas o historietas.",
+            "Fotografías, música (solo con letra), ensayos, programas de cómputo.",
+            "Articulos, fotografías, música (con o sin letra), ensayos."
+          ],
+          "indiceRespuesta": 0,
+          "feedback": "La mayoria de las obras se pueden contar con derechos de autor."
+        },
+        {
+          "pregunta": "¿Cuáles son los dos tipos de derechos principales que maneja esta ley?",
+          "opciones": [
+            "Derecho mercantil y derecho vigente.",
+            "Derecho subjetivo y derecho penal.",
+            "Derecho moral y derecho patrimonial."
+          ],
+          "indiceRespuesta": 2,
+          "feedback": "Recordando que es asunto moral y la obra pertenece al autor"
         }
       ],
       "leccion": {
@@ -29,7 +51,7 @@
               "Concepto 2",
               "Concepto 3"
           ],
-          "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ligula sit amet ante scelerisque mollis. Mauris quis velit tempus, scelerisque nulla scelerisque, cursus nunc. Maecenas augue velit"
+          "texto": "La Ley Federal del Derecho de Autor (LFDA) es el instrumento a través del cual se protege el derecho de los autores en México.\nLa Ley Mexicana protege al autor y es quien le otorga prerrogativas de carácter personal y patrimonial en la LFDA que es administrada por INDAUTOR."
       },
       "historietas": [
           {
@@ -45,52 +67,87 @@
         ]
     },
     {
-      "tema": "Conceptos Básicos 2",
-      "preguntaActual": 2,
-      "puntaje": 1,
-      "feedBackAcum": ["Recuerda que la LFDA ..."],
+      "tema": "Derecho Moral y Derecho Patrimonial",
+      "foto": "t2-star",
+      "disponible": false,
       "preguntas": [
         {
-          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "pregunta": "¿Quiénes pueden ejercer este derecho?",
           "opciones": [
-            "Reconocer a los autores de obras literarias",
-            "La salvaguarda y promoción del acervo cultural de la Nación",
-            "Pagarle a los autores por cada obra literaria que realice"
+            "Solamente el estado.",
+            "El autor y sus hermanos.",
+            "Solamente el autor, ante su ausencia, el heredero o, en caso de que no haya, el Estado."
           ],
-          "indiceRespuesta": 1,
-          "feedback": "Recuerda que la LFDA es ...",
-          "opcionSeleccionada": 2,
+          "indiceRespuesta": 2,
+          "feedback": "Recuerda que el derecho es del autor, en su ausencia es del heredero"
         },
         {
-          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "pregunta": "¿El reconocimiento de la autoría tiene que ser obligatoriamente el nombre que aparece en el acta de nacimiento del autor?",
           "opciones": [
-            "Reconocer a los autores de obras literarias",
-            "La salvaguarda y promoción del acervo cultural de la Nación",
-            "Pagarle a los autores por cada obra literaria que realice"
+            "Verdadero.",
+            "No, nombre completo e iniciales posteriormente.",
+            "No, también se puede utilizar un seudónimo."
           ],
-          "indiceRespuesta": 1,
-          "feedback": "Sacaste mal esta pregunta",
-          "opcionSeleccionada": 1,
+          "indiceRespuesta": 2,
+          "feedback": "Con que tenga referencia al autor, se puede utilizar un seudónimo."
         },
         {
-          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "pregunta": "Son acciones que el autor decide si se realizan o no:",
           "opciones": [
-            "Reconocer a los autores de obras literarias",
-            "La salvaguarda y promoción del acervo cultural de la Nación",
-            "Pagarle a los autores por cada obra literaria que realice"
+            "Determinar si la obra se publica o no y si se puede modificar o no.",
+            "Solamente determinar si la obra se publica.",
+            "Solamente determinar si se puede modificar o no."
           ],
-          "indiceRespuesta": 1,
-          "feedback": "Recuerda que la LFDA es ...",
+          "indiceRespuesta": 0,
+          "feedback": "Recuerda que el autor puede hacer lo que quiera con su obra."
         },
         {
-          "pregunta": "La ley federal del derecho de autor tiene por objeto:",
+          "pregunta": "El derecho moral le permite al autor oponerse en caso de que se le atribuya una obra que no es de su autoría.",
           "opciones": [
-            "Reconocer a los autores de obras literarias",
-            "La salvaguarda y promoción del acervo cultural de la Nación",
-            "Pagarle a los autores por cada obra literaria que realice"
+            "Verdadero",
+            "Falso"
+          ],
+          "indiceRespuesta": 0,
+          "feedback": "Es el punto principal de este derecho"
+        },
+        {
+          "pregunta": "¿Durante cuánto tiempo ejerce este derecho el autor?",
+          "opciones": [
+            "Durante toda su vida y permanece vigente hasta cien años después de su muerte.",
+            "Solamente durante toda su vida.",
+            "50 años despues de la publicación."
+          ],
+          "indiceRespuesta": 0,
+          "feedback": "Recuerda que el derecho tambien se queda durante cien años despues de su muerte"
+        },
+        {
+          "pregunta": "¿Qué pasa después de ese tiempo?",
+          "opciones": [
+            "La obra se queda privada.",
+            "La obra se convierte en dominio público.",
+            "El derecho se pasa a algun familiar del autor."
           ],
           "indiceRespuesta": 1,
-          "feedback": "Recuerda que la LFDA es ...",
+          "feedback": "Si la obra ya no tiene dueño se convierte en dominio publico."
+        },
+        {
+          "pregunta": "¿Por qué todo acto relacionado con derechos de autor debe tener una constancia por escrito?",
+          "opciones": [
+            "Porque de lo contrario los derechos serán nulos.",
+            "Porque de lo contrario se mete una demanda al autor.",
+            "No es obligatorio una constancia por escrito."
+          ],
+          "indiceRespuesta": 0,
+          "feedback": "Recuerda que es necesario tener una constancia para mantenerlo legal."
+        },
+        {
+          "pregunta": "Gracias al derecho patrimonial el autor es sujeto a recibir remuneraciones económicas (regalías).",
+          "opciones": [
+            "Verdadero.",
+            "Falso.",
+          ],
+          "indiceRespuesta": 0,
+          "feedback": "El derecho patrimonial es susceptible de tener un valor económico y se contrapone a los derechos extrapatrimoniales"
         }
       ],
       "leccion": {
@@ -99,7 +156,107 @@
               "Concepto 2",
               "Concepto 3"
           ],
-          "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ligula sit amet ante scelerisque mollis. Mauris quis velit tempus, scelerisque nulla scelerisque, cursus nunc. Maecenas augue velit"
+          "texto": "Derecho Moral: Consiste en el reconocimiento de la autoría de una obra original.\nEs inalienable, imprescriptible, irrenunciable inembargable.\nDerecho Patrimonial: Permiten la explotación económica de la obra. El autor es quien puede adjudicar licencias de uso."
+      },
+      "historietas": [
+          {
+              "foto":"abuelo1",
+              "titulo":"Creación de una obra",
+              "explicacion":"El abuelo Scott, después de muchos años, por fin pudo completar la creación de su libro."
+          },
+          {
+              "foto":"abuelo2",
+              "titulo":"Una muerte trágica",
+              "explicacion":"Desafortunadamente durante la edición del mismo el abuelo Scott falleció..."
+          },
+          {
+              "foto":"abuelo3",
+              "titulo":"Estado creador",
+              "explicacion":"Como el abuelo no contaba con ningún heredero, el Estado tuvo que tomar cartas en el asunto y quedarse con todos los derechos."
+          }
+      ]
+    },
+    {
+      "tema": "Material de Terceros",
+      "foto": "t3-star",
+      "disponible": false,
+      "preguntas": [
+        {
+          "pregunta": "Son formas de reconocer y utilizar el material de terceros:",
+          "opciones": [
+            "Autorización expresa, licencia Creative Commons, licencias comerciales, excepciones contenidas en la LFDA.",
+            "Lo que te dice tu amigo que sabe del material de terceros.",
+            "El blog de un influencer de leyes."
+          ],
+          "indiceRespuesta": 0,
+          "feedback": ""
+        },
+        {
+          "pregunta": "¿Qué es una autorización expresa?",
+          "opciones": [
+            "Es un acuerdo hablado que se discuten los terminos y condiciones para el uso de una obra de algun tercero.",
+            "Es el permiso para poder publicar una obra.",
+            "Es una carta que contiene los términos y condiciones para el uso de una obra de algún tercero."
+          ],
+          "indiceRespuesta": 2,
+          "feedback": "Esta carta es fundamental para poder tener conciencia de los terminos."
+        },
+        {
+          "pregunta": "Por ley, ¿cuánto es la cantidad que CEMPRO (Centro Mexicano de Protección y Fomento a los Derechos de Autor) te permite reproducir de las obras literarias para uso personal?",
+          "opciones": [
+            "Hasta un 20% o las primeras 50 paginas.",
+            "Hasta un 10% o las primeras 50 páginas.",
+            "Hasta un 10% o las primeras 100 paginas"
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Es todo lo que permiten las leyes"
+        },
+        {
+          "pregunta": "¿Qué nos permite Creative Commons?",
+          "opciones": [
+            "Tener conocimiento de los derechos.",
+            "Saber si puedo publicar una obra.",
+            "Dejar un sello en las cosas que yo hice para indicar los permisos que otorgo."
+          ],
+          "indiceRespuesta": 2,
+          "feedback": "Creative Commons indica los permisos otorgados."
+        },
+        {
+          "pregunta": "Es una forma de adquirir licencias de uso de material de terceros, directamente de manera comercial:",
+          "opciones": [
+            "Lincencias de integracion",
+            "Licencias de Paga.",
+            "No es necesario adquirir licencias."
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "Las licencias de paga dan permiso de utilizar material de terceros."
+        },
+        {
+          "pregunta": "Las obras ya divulgadas podrán utilizarse, siempre que no se afecte la explotación normal de la obra.",
+          "opciones": [
+            "Verdadero",
+            "Falso",
+          ],
+          "indiceRespuesta": 0,
+          "feedback": "Es posible siempre y cuando no afecte la obra."
+        },
+        {
+          "pregunta": "TODO lo que publica la prensa es de dominio público.",
+          "opciones": [
+            "Verdadero.",
+            "Falso.",
+          ],
+          "indiceRespuesta": 1,
+          "feedback": "No todo, ya que en ocasiones el medio puede hacer una prohibición expresa, solo en esos casos no será de dominio público."
+        }
+      ],
+      "leccion": {
+          "conceptosClave": [
+              "Concepto 1",
+              "Concepto 2",
+              "Concepto 3"
+          ],
+          "texto": "Existen diversos tipos de licencias que se ajustan a las necesidades comerciales o no comerciales del usuario.\nTipos de licencia Creative Commons. \nCCO: La obra es de dominio público. Puedes copiar, distribuir, mostrar y hacer remixes.\nBY: La obra requiere que se de crédito al creador de la obra.\nSA: (Share-alike) Cualquier aplicación, siempre y cuándo distribuyar el material bajo el mismo tipo de licencia.\nND: (No derivates) Debes usar la pieza completa y sin alteraciones.\nNC: (Non-comercial) No tienes permisos comerciales."
       },
       "historietas": [
           {
@@ -113,7 +270,5 @@
               "explicacion":"En este caso, pasa estooosososu ..."
           }
         ]
-    },
-    
+    }
 ]
-

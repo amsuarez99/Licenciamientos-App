@@ -40,6 +40,7 @@ class CuestionariosController: UIViewController, cuestionarioController {
         setupAlerta()
     }
 
+    
     private func setupView() {
         self.view.backgroundColor = .white
         self.view.addSubview(tableView)
@@ -58,9 +59,16 @@ class CuestionariosController: UIViewController, cuestionarioController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+//        setupNav()
+        self.tableView.reloadData()
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+//    private func setupNav() {
+//        UINavigationBar.appearance().barTintColor = .white
+//        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: Constants.App.Colors.grayTint]
+//        UINavigationBar.appearance().tintColor = Constants.App.Colors.grayTint
+//    }
     
     // MARK: Protocol Cuestionario Controller
     func getResumenInstance() -> ResumenSwipeController {
@@ -91,9 +99,19 @@ extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
         DataSingleton.shared.cuestionarios.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! TemaCell
         cell.nameLabel.text = DataSingleton.shared.cuestionarios[indexPath.row].getTema()
+        if DataSingleton.shared.cuestionarios[indexPath.row].isDisponible() {
+            cell.cardView.backgroundColor = Constants.App.Colors.indigoTint
+            cell.cardView.layer.shadowRadius = 7
+            cell.isUserInteractionEnabled = true
+        } else {
+            cell.cardView.backgroundColor = .placeholderText
+            cell.cardView.layer.shadowRadius = 0
+            cell.isUserInteractionEnabled = false
+        }
         return cell
     }
     
@@ -102,6 +120,7 @@ extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
         // Sets the question controller and assigns it to self so that it can retrieve resumenController
         DataSingleton.shared.usuario.cuestionarioActual = indexPath.row
         if DataSingleton.shared.cuestionarios[indexPath.row].getProgreso() == nil {
@@ -136,7 +155,6 @@ extension CuestionariosController: UITableViewDelegate, UITableViewDataSource {
         cancelar = UIAlertAction(title: "Cancelar", style: .cancel) { (action) -> Void in
 //            print("Usuario cancela el reiniciado")
         }
-        
         alerta.addAction(reiniciar)
         alerta.addAction(cancelar)
     }
@@ -183,7 +201,7 @@ class TemaCell: UITableViewCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Sample Answer"
-        label.font = Constants.App.Fonts.markupFont
+        label.font = Constants.App.Fonts.markupFontSmaller
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -195,6 +213,11 @@ class TemaCell: UITableViewCell {
         v.translatesAutoresizingMaskIntoConstraints = false
         v.layer.cornerRadius = 15
         v.clipsToBounds = true
+        v.layer.shadowColor = UIColor.black.cgColor
+        v.layer.shadowOpacity = 1
+        v.layer.shadowOffset = .zero
+        v.layer.shadowRadius = 10
+        v.layer.masksToBounds = false
         return v
     }()
     
@@ -213,7 +236,7 @@ class TemaCell: UITableViewCell {
         NSLayoutConstraint.activate([
             cardView.centerXAnchor.constraint(equalTo: centerXAnchor),
             cardView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            cardView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8),
+            cardView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.80),
             cardView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9)
         ])
         

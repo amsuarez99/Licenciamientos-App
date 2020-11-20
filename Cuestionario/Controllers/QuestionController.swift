@@ -15,6 +15,9 @@ protocol cuestionarioController {
 
 class QuestionController: UIViewController{
     
+    private var alerta: UIAlertController!
+    private var ok: UIAlertAction!
+    
     private var cellHeight = 75
     var pregunta: Pregunta!
     var numPregunta: Int!
@@ -71,7 +74,11 @@ class QuestionController: UIViewController{
     }()
     
     @IBAction private func contestaPregunta() {
-        guard let respuestaSeleccionada = respuestaSeleccionada else {print("Selecciona Una opción"); return} // falta notificar que se seleccione una opcion
+        guard let respuestaSeleccionada = respuestaSeleccionada else {
+            self.present(alerta, animated: true, completion: nil)
+            return
+        }
+        
         if pregunta.esRespuestaCorrecta(indiceRespuesta: respuestaSeleccionada) {
             DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].preguntas[numPregunta].setOpcionSeleccionada(respuestaSeleccionada)
             DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].contestaCorrecto()
@@ -99,6 +106,7 @@ class QuestionController: UIViewController{
         setupNav()
         setupTableView()
         setupViews()
+        setupAlerta()
     }
     
     @IBAction private func presentVC(){
@@ -178,6 +186,14 @@ class QuestionController: UIViewController{
             tableView.heightAnchor.constraint(equalToConstant: CGFloat(pregunta.getOpciones().count * cellHeight))
         ])
     }
+    
+    
+    private func setupAlerta() {
+        alerta = UIAlertController(title: nil, message: "Selecciona una opción para continuar el cuestionario", preferredStyle: .alert)
+        ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alerta.addAction(ok)
+    }
+    
 }
 
 

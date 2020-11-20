@@ -18,16 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         
         // Navbar appearance
-        UINavigationBar.appearance().barTintColor = Constants.App.Colors.orangeTint
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: Constants.App.Colors.grayTint]
+        UINavigationBar.appearance().tintColor = Constants.App.Colors.grayTint
         
         
         // Sets NavController as root and adds root to it
         let nav = UINavigationController()
         let rootVC = RootViewController()
         nav.viewControllers = [rootVC]
-        nav.setNavigationBarHidden(true, animated: false)
         
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
