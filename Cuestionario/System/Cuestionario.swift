@@ -7,13 +7,6 @@
 
 import UIKit
 
-//
-//    func getPreguntas()-> [Pregunta]! { return self.preguntas }
-//    func getPregunta(for indice: Int) -> Pregunta! { return self.preguntas[indice] }
-//    func getTema() -> String { return self.tema }
-//    func getDescripcion() -> String { return self.descripcion}
-//}
-
 class Cuestionario: Codable {
     private var tema: String
     private var foto: String
@@ -21,26 +14,25 @@ class Cuestionario: Codable {
     private var puntaje: Int?
     private var feedbackAcum: [String]?
     private var disponible: Bool?
+    private var calificacion: Int?
     
     var preguntas: [Pregunta]
     var leccion: Leccion
     var historietas: [Historieta]
     
-    private var terminado: Bool {
-        return preguntaActual == preguntas.count
-    }
     private var progreso: Int? {
         guard let preguntaActual = self.preguntaActual else { return nil }
         return Int( preguntaActual / preguntas.count ) * 100
     }
     
-    private var calificacion: Int?
+
     
     enum CodingKeys: CodingKey {
         case tema
         case disponible
         case preguntaActual
         case puntaje
+        case calificacion
         case feedbackAcum
         case preguntas
         case leccion
@@ -54,6 +46,7 @@ class Cuestionario: Codable {
         self.foto = try container.decode(String.self, forKey: .foto)
         self.disponible = try container.decode(Bool.self, forKey: .disponible)
         self.preguntaActual = try container.decodeIfPresent(Int.self, forKey: .preguntaActual)
+        self.calificacion = try container.decodeIfPresent(Int.self, forKey: .calificacion)
         self.puntaje = try container.decodeIfPresent(Int.self, forKey: .puntaje)
         self.feedbackAcum = try container.decodeIfPresent([String].self, forKey: .feedbackAcum)
         self.preguntas = try container.decode([Pregunta].self, forKey: .preguntas)
@@ -74,9 +67,14 @@ class Cuestionario: Codable {
         guard let puntaje = self.puntaje else { return nil }
         return puntaje
     }
-    func getCalificacion() -> Int! {
+    
+    func calificaCuestionario() -> Void {
         self.calificacion = Int(Double(self.puntaje!) / Double(self.preguntas.count) * 100)
-        return self.calificacion!
+    }
+    
+    func getCalificacion() -> Int? {
+        guard let calificacion = self.calificacion else { return nil }
+        return calificacion
     }
     func getNumPreguntaActual() -> Int? {
         guard let preguntaActual = self.preguntaActual else { return nil }
@@ -85,7 +83,7 @@ class Cuestionario: Codable {
     
     
     func agregaFeedback(_ fb: String) -> Void {
-        feedbackAcum?.append(fb)
+        self.feedbackAcum?.append(fb)
     }
     
     func isDisponible() -> Bool {
@@ -96,6 +94,8 @@ class Cuestionario: Codable {
         self.disponible = b
     }
     
+    func isTerminado() -> Bool { return self.preguntaActual == self.preguntas.count }
+    
     func startCuestionario() -> Void {
         self.preguntaActual = 0
         self.puntaje = 0
@@ -103,7 +103,6 @@ class Cuestionario: Codable {
         self.disponible = true
     }
     func contestaPregunta() -> Void { self.preguntaActual = self.preguntaActual! + 1 }
-    func isTerminado() -> Bool { return self.terminado }
     func contestaCorrecto() -> Void { self.puntaje = self.puntaje! + 1 }
     func setPreguntaActual(_ preguntaActual: Int) -> Void { self.preguntaActual = preguntaActual }
 }

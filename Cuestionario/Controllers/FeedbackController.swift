@@ -105,7 +105,7 @@ class FeedbackController: UIViewController{
         default:
             feedbackString = "¡Falta poco para el 70!\n\nRecuerda que:\n"
         }
-        feedbackString.append(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getFeedback().joined(separator: "\n"))
+        feedbackString.append(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getFeedback().joined(separator: "\n\n"))
         
         attributedText.append(NSMutableAttributedString(string: "\n\n" + feedbackString, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint]))
         

@@ -75,8 +75,8 @@ class ResumenController: UIViewController{
        let textView = UITextView()
         let centerPS = NSMutableParagraphStyle()
         centerPS.alignment = .center
-        let justifiedPS = NSMutableParagraphStyle()
-        justifiedPS.alignment = .justified
+        let leftPS = NSMutableParagraphStyle()
+        leftPS.alignment = .left
         
         var attributes: [NSAttributedString.Key: Any] = [
             .paragraphStyle: centerPS,
@@ -84,7 +84,7 @@ class ResumenController: UIViewController{
         ]
         let attributedText = NSMutableAttributedString(string: "¿QUÉ DICE LA LEY?", attributes: attributes)
         let stringText = DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getLeccion().getTexto()
-        attributedText.append(NSMutableAttributedString(string: "\n\n" + stringText, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint, NSAttributedString.Key.paragraphStyle: justifiedPS]))
+        attributedText.append(NSMutableAttributedString(string: "\n\n" + stringText, attributes: [NSAttributedString.Key.font: Constants.App.Fonts.textFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint, NSAttributedString.Key.paragraphStyle: leftPS]))
         textView.attributedText = attributedText
         textView.isEditable = false
         textView.isScrollEnabled = true

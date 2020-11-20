@@ -94,6 +94,7 @@ class QuestionController: UIViewController{
             qVC.delegadoCuestionario = delegadoCuestionario
             self.navigationController?.pushViewController(qVC, animated: true)
         } else {
+            DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].calificaCuestionario()
             let feedbackVC = FeedbackController()
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             self.navigationController?.pushViewController(feedbackVC, animated: true)
@@ -127,16 +128,16 @@ class QuestionController: UIViewController{
     private func setupViews() {
         
         self.view.backgroundColor = .white
-        // Sets up Question
-        tvPregunta.attributedText = NSMutableAttributedString(string: "Q\(self.numPregunta + 1): \(self.pregunta.getPregunta())", attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint])
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        tvPregunta.attributedText = NSMutableAttributedString(string: pregunta.getPregunta(), attributes: [NSAttributedString.Key.font: Constants.App.Fonts.markupFont!, NSAttributedString.Key.foregroundColor: Constants.App.Colors.grayTint, NSAttributedString.Key.paragraphStyle: paragraphStyle])
         lbProgreso.text = "Pregunta \(self.numPregunta + 1) de \(delegadoCuestionario.getNumPreguntas())"
-        print(DataSingleton.shared.usuario.cuestionarioActual)
         lbScore.text! += String(DataSingleton.shared.cuestionarios[DataSingleton.shared.usuario.cuestionarioActual].getPuntaje()!)
+        
         let labelsStackView = UIStackView(arrangedSubviews: [lbProgreso,lbScore])
         labelsStackView.translatesAutoresizingMaskIntoConstraints = false
         labelsStackView.distribution = .fillEqually
         view.addSubview(labelsStackView)
-        
         NSLayoutConstraint.activate([
             labelsStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             labelsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
@@ -149,11 +150,11 @@ class QuestionController: UIViewController{
             tvPregunta.topAnchor.constraint(equalTo: labelsStackView.bottomAnchor),
             tvPregunta.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             tvPregunta.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            tvPregunta.heightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.20),
+            tvPregunta.heightAnchor.constraint(lessThanOrEqualTo:view.safeAreaLayoutGuide.heightAnchor),
         ])
         
-        let bottomPortionContainer = UIView()
         
+        let bottomPortionContainer = UIView()
         bottomPortionContainer.layer.shadowColor = UIColor.lightGray.cgColor
         bottomPortionContainer.layer.shadowOpacity = 0.5
         bottomPortionContainer.layer.shadowOffset = .zero
@@ -163,7 +164,7 @@ class QuestionController: UIViewController{
         NSLayoutConstraint.activate([
             bottomPortionContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             bottomPortionContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            bottomPortionContainer.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.75),
+            bottomPortionContainer.topAnchor.constraint(equalTo: tvPregunta.bottomAnchor),
             bottomPortionContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         
@@ -185,6 +186,7 @@ class QuestionController: UIViewController{
             tableView.topAnchor.constraint(equalTo: bottomPortionContainer.topAnchor),
             tableView.heightAnchor.constraint(equalToConstant: CGFloat(pregunta.getOpciones().count * cellHeight))
         ])
+        
     }
     
     

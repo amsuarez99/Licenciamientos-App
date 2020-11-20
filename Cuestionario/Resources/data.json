@@ -55,14 +55,19 @@
       },
       "historietas": [
           {
-              "foto":"foto1",
-              "titulo":"Caso1",
-              "explicacion":"En este caso, pasa que ..."
+              "foto":"spider1",
+              "titulo":"¿Sabías que...?",
+              "explicacion":"Entre 1985 y 2015 Marvel no pudo explotar su personaje Spiderman"
           },
           {
-              "foto":"foto2",
-              "titulo":"Caso2",
-              "explicacion":"En este caso, pasa esto otro ..."
+              "foto":"spider2",
+              "titulo":"Una noche triste",
+              "explicacion":"Ya que pasaban por un momento de crisis económica"
+          },
+          {
+              "foto":"spider3",
+              "titulo":"Show me the money",
+              "explicacion":"Y le tuvo que vender los derechos de uso a Sony\n:-("
           }
         ]
     },

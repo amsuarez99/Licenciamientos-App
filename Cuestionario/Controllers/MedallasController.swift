@@ -75,7 +75,7 @@ class MedallasController: UICollectionViewController, UICollectionViewDelegateFl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MedalCard
         var imageString = DataSingleton.shared.cuestionarios[indexPath.item].getFoto()
         cell.medalName = DataSingleton.shared.cuestionarios[indexPath.item].getTema()
-        if DataSingleton.shared.cuestionarios[indexPath.row].isDisponible() {
+        if let calificacion = DataSingleton.shared.cuestionarios[indexPath.row].getCalificacion(), calificacion >= 70 {
             cell.color = Constants.App.Colors.grayTint
             cell.card.layer.shadowRadius = 10
             cell.card.backgroundColor = .systemGray6
