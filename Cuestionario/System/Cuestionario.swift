@@ -14,7 +14,7 @@ import UIKit
 //    func getDescripcion() -> String { return self.descripcion}
 //}
 
-class Cuestionario: Decodable {
+class Cuestionario: Codable {
     private var tema: String
     private var foto: String
     private var preguntaActual: Int?
